@@ -1,0 +1,120 @@
+{
+    "name": "@nlib/changelog",
+    "publishConfig": {
+        "access": "public"
+    },
+    "version": "0.0.0",
+    "license": "Apache-2.0",
+    "author": {
+        "name": "Kei Ito",
+        "email": "kei.itof@gmail.com",
+        "url": "https://github.com/kei-ito"
+    },
+    "homepage": "https://github.com/nlibjs/changelog",
+    "repository": "https://github.com/nlibjs/changelog",
+    "engines": {
+        "node": ">=12"
+    },
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
+    "bin": {
+        "nlib-changelog": "lib/cli.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "ava",
+        "lint": "eslint --ext .ts --ext .js src",
+        "version:changelog": "ts-node src/cli.ts",
+        "version:add": "git add .",
+        "version": "run-s version:changelog version:add",
+        "prepack": "rimraf 'lib/**/*.test.*'"
+    },
+    "dependencies": {
+        "@nlib/global": "^3.17.8",
+        "@nlib/typing": "0.0.3"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^9.1.2",
+        "@commitlint/config-conventional": "^9.1.2",
+        "@nlib/eslint-config": "^3.17.6",
+        "@nlib/test": "^3.17.4",
+        "@types/eslint": "^7.2.2",
+        "@typescript-eslint/eslint-plugin": "^3.10.1",
+        "@typescript-eslint/parser": "^3.10.1",
+        "ava": "^3.12.1",
+        "conventional-changelog-cli": "^2.1.0",
+        "eslint": "^7.7.0",
+        "husky": "^4.2.5",
+        "lint-staged": "^10.2.13",
+        "npm-run-all": "^4.1.5",
+        "rimraf": "^3.0.2",
+        "ts-node": "^9.0.0",
+        "typescript": "^4.0.2"
+    },
+    "ava": {
+        "extensions": [
+            "ts",
+            "js"
+        ],
+        "require": [
+            "ts-node/register"
+        ],
+        "files": [
+            "!**/*.module.ts"
+        ]
+    },
+    "eslintConfig": {
+        "extends": [
+            "@nlib/eslint-config"
+        ],
+        "env": {
+            "node": true
+        },
+        "rules": {
+            "@nlib/restrict-globals": "error"
+        },
+        "overrides": [
+            {
+                "files": [
+                    "src/cli.ts"
+                ],
+                "rules": {
+                    "no-console": "off"
+                }
+            }
+        ]
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint"
+        ],
+        "*.js": [
+            "eslint"
+        ]
+    },
+    "renovate": {
+        "extends": [
+            ":ignoreModulesAndTests",
+            ":unpublishSafe",
+            ":semanticPrefixChore",
+            ":prNotPending",
+            ":prConcurrentLimit10",
+            ":prHourlyLimitNone",
+            ":label(dependencies)",
+            ":automergeMinor"
+        ]
+    }
+}
