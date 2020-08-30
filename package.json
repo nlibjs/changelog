@@ -81,7 +81,8 @@
                     "src/cli.ts"
                 ],
                 "rules": {
-                    "no-console": "off"
+                    "no-console": "off",
+                    "@nlib/restrict-globals": ["error", {"allowed": ["__dirname", "module"]}]
                 }
             }
         ]
