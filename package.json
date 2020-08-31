@@ -83,6 +83,14 @@
                     "no-console": "off",
                     "@nlib/restrict-globals": ["error", {"allowed": ["__dirname", "module"]}]
                 }
+            },
+            {
+                "files": [
+                    "*.test.ts"
+                ],
+                "rules": {
+                    "max-lines-per-function": "off"
+                }
             }
         ]
     },
