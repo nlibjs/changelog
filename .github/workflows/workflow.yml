@@ -50,6 +50,8 @@ jobs:
           # - 12.x
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/cache@v2
         with:
           path: node_modules
