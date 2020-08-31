@@ -38,8 +38,7 @@ export const CommitFormat = [
 export const getCommit = async (
     commitish: string,
 ): Promise<Commit> => {
-    const result = await exec(`git log -1 --format='${CommitFormat}' ${commitish}`);
-    const rawCommit = result.stdout.trim();
+    const {stdout: rawCommit} = await exec(`git log -1 --format='${CommitFormat}' ${commitish}`);
     let offset = 0;
     const consume = (): string => {
         const currentOffset = offset;
@@ -47,9 +46,8 @@ export const getCommit = async (
         offset = nextNewLineOffset + 1;
         return rawCommit.slice(currentOffset, nextNewLineOffset);
     };
-    const refs = parseRefNames(consume());
     return ensure({
-        tag: refs.tag,
+        ...parseRefNames(consume()),
         hash: consume(),
         shortHash: consume(),
         parentHash: consume(),

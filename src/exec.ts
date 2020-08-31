@@ -13,10 +13,7 @@ export const exec = async (
         if (error) {
             reject(error);
         } else {
-            resolve({
-                stdout: stdout.trim(),
-                stderr: stderr.trim(),
-            });
+            resolve({stdout, stderr});
         }
     });
 });
