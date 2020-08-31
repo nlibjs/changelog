@@ -1,5 +1,10 @@
-export const generateChangelog = async function* (
+import {Commit} from './is/Commit';
+import {groupCommits} from './groupCommits';
 
-): AsyncIterator<string> {
-    // tbw
+export const generateChangelog = async function* (
+    commits: AsyncGenerator<Commit> | Iterable<Commit>,
+): AsyncGenerator<string> {
+    for await (const group of groupCommits(commits)) {
+        yield group.tag;
+    }
 };
