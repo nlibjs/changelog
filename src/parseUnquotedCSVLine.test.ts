@@ -7,5 +7,5 @@ ava('parse a CSV line', (t) => {
     t.deepEqual(iterator.next(), {done: false, value: 'foo'});
     t.deepEqual(iterator.next(), {done: false, value: 'bar'});
     t.deepEqual(iterator.next(), {done: false, value: ''});
-    t.deepEqual(iterator.next(), {done: true, value: ''});
+    t.like(iterator.next(), {done: true});
 });

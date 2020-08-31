@@ -6,6 +6,7 @@ testFunction(getCommit, {
     input: 'b3ec2a662d1adf4d040960bd5ae40b2d7e308418',
     expected: {
         tag: ['tag-2', 'tag-1'],
+        reference: [],
         hash: 'b3ec2a662d1adf4d040960bd5ae40b2d7e308418',
         shortHash: 'b3ec2a6',
         parentHash: '09261b7cd053b3b2c0a75bbe21266c1843768fec',

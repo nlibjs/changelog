@@ -21,6 +21,7 @@ const CommitterEmail = '%aE';
 const RefNames = '%D';
 const RawBody = '%B';
 
+export const prefix = '> ';
 export const CommitFormat = [
     RefNames,
     CommitHash,
@@ -33,17 +34,19 @@ export const CommitFormat = [
     CommitterName,
     CommitterEmail,
     RawBody,
-].join(NewLine);
+]
+.map((line) => `${prefix}${line}`)
+.join(NewLine);
 
 export const getCommit = async (
     commitish: string,
 ): Promise<Commit> => {
     const {stdout: rawCommit} = await exec(`git log -1 --format='${CommitFormat}' ${commitish}`);
-    let offset = 0;
+    let offset = prefix.length;
     const consume = (): string => {
         const currentOffset = offset;
         const nextNewLineOffset = rawCommit.indexOf('\n', offset);
-        offset = nextNewLineOffset + 1;
+        offset = nextNewLineOffset + 1 + prefix.length;
         return rawCommit.slice(currentOffset, nextNewLineOffset);
     };
     return ensure({

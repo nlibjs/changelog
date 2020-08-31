@@ -4,6 +4,7 @@ import {CommitCommitter, isCommitCommitter} from './CommitCommitter';
 
 export interface Commit {
     tag: Array<string>,
+    reference: Array<string>,
     hash: string,
     shortHash: string,
     parentHash: string,
@@ -17,6 +18,7 @@ export const isCommit = createTypeChecker<Commit>(
     'Commit',
     {
         tag: [isString],
+        reference: [isString],
         hash: isString,
         shortHash: isString,
         parentHash: isString,
