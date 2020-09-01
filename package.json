@@ -78,6 +78,14 @@
         "overrides": [
             {
                 "files": [
+                    "*.test.ts"
+                ],
+                "rules": {
+                    "max-lines-per-function": "off"
+                }
+            },
+            {
+                "files": [
                     "src/cli.ts"
                 ],
                 "rules": {
