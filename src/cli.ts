@@ -4,11 +4,15 @@ import * as console from 'console';
 import * as path from 'path';
 import * as fs from 'fs';
 import {JSON} from '@nlib/global';
-// import {generateChangelog} from './generateChangelog';
+import {generateChangelog} from './generateChangelog';
 
 const execute = async (
 ) => {
-    // tbw
+    const output = fs.createWriteStream('CHANGELOG.md');
+    for await (const fragment of generateChangelog()) {
+        output.write(fragment);
+    }
+    output.close();
 };
 
 if (!module.parent) {

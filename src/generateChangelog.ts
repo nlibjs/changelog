@@ -1,10 +1,40 @@
+import {Serializable, serialize} from '@nlib/global';
 import {Commit} from './is/Commit';
-import {groupCommits} from './groupCommits';
+import {groupCommits, CommitGroup} from './groupCommits';
+import {serializeCommitGroup} from './serializeCommitGroup';
+import {walkCommitHistory} from './walkCommitHistory';
+
+export const generateChangelogFromCommits = async function* (
+    commits: AsyncGenerator<Commit> | Iterable<Commit>,
+    {
+        serializer = serializeCommitGroup,
+        header = '# Changelog\n\n',
+        footer = '',
+    }: {
+        serializer?: (commitGroup: CommitGroup) => Serializable,
+        header?: string,
+        footer?: string,
+    } = {},
+): AsyncGenerator<string> {
+    if (header) {
+        yield header;
+    }
+    for await (const commitGroup of groupCommits(commits)) {
+        yield* serialize(serializer(commitGroup));
+        yield '\n';
+    }
+    if (footer) {
+        yield footer;
+    }
+};
 
 export const generateChangelog = async function* (
-    commits: AsyncGenerator<Commit> | Iterable<Commit>,
+    props: {
+        headCommit?: string,
+        serializer?: (commitGroup: CommitGroup) => Generator<string> | string,
+        header?: string,
+        footer?: string,
+    } = {},
 ): AsyncGenerator<string> {
-    for await (const group of groupCommits(commits)) {
-        yield group.tag;
-    }
+    yield* generateChangelogFromCommits(walkCommitHistory(props.headCommit), props);
 };
