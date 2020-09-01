@@ -23,7 +23,7 @@ testFunction(extractCommitType, {
 });
 testFunction(extractCommitType, {
     input: ' foo',
-    expected: {type: '_', body: 'foo'},
+    expected: {type: '', body: 'foo'},
 });
 testFunction(extractCommitType, {
     parameters: [' foo', '__'],
