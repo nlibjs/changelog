@@ -1,8 +1,9 @@
 import {getCommit} from './getCommit';
+import {Commit} from './is/Commit';
 
 export const walkCommitHistory = async function* (
     startCommitish = 'HEAD',
-): AsyncGenerator {
+): AsyncGenerator<Commit> {
     let commitish = startCommitish;
     while (commitish) {
         const commit = await getCommit(commitish);
