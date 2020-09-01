@@ -32,9 +32,9 @@
         "prepack": "rimraf 'lib/**/*.test.*'"
     },
     "dependencies": {
-        "@nlib/date": "0.0.2",
+        "@nlib/date": "0.0.3",
         "@nlib/global": "^3.17.10",
-        "@nlib/typing": "0.0.3"
+        "@nlib/typing": "0.0.4"
     },
     "devDependencies": {
         "@commitlint/cli": "^9.1.2",
