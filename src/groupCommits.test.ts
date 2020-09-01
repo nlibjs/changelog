@@ -38,7 +38,7 @@ ava('group commits', async (t) => {
     t.deepEqual(await iterator.next(), {
         done: false,
         value: {
-            tag: '',
+            tag: null,
             commits: new Map([
                 ['', [
                     {...baseCommit},
@@ -56,6 +56,7 @@ ava('group commits', async (t) => {
         done: false,
         value: {
             tag: 'v1.0.1',
+            commit: {...baseCommit, message: 'v1.0.1', tag: ['v1.0.1']},
             commits: new Map([
                 ['', [
                     {...baseCommit, message: 'v1.0.1', tag: ['v1.0.1']},
@@ -74,6 +75,7 @@ ava('group commits', async (t) => {
         done: false,
         value: {
             tag: 'v1.0.0',
+            commit: {...baseCommit, message: 'v1.0.0', tag: ['v1.0.0']},
             commits: new Map([
                 ['', [
                     {...baseCommit, message: 'v1.0.0', tag: ['v1.0.0']},
