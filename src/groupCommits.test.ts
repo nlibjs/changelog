@@ -40,7 +40,7 @@ ava('group commits', async (t) => {
         value: {
             tag: '',
             commits: new Map([
-                ['_', [
+                ['', [
                     {...baseCommit},
                 ]],
                 ['chore', [
@@ -57,7 +57,7 @@ ava('group commits', async (t) => {
         value: {
             tag: 'v1.0.1',
             commits: new Map([
-                ['_', [
+                ['', [
                     {...baseCommit, message: 'v1.0.1', tag: ['v1.0.1']},
                 ]],
                 ['feat', [
@@ -75,7 +75,7 @@ ava('group commits', async (t) => {
         value: {
             tag: 'v1.0.0',
             commits: new Map([
-                ['_', [
+                ['', [
                     {...baseCommit, message: 'v1.0.0', tag: ['v1.0.0']},
                 ]],
                 ['ci', [

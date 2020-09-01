@@ -2,7 +2,7 @@ import {AppError} from '@nlib/global';
 
 export const extractCommitType = (
     commitMessage: string,
-    noType = '_',
+    noType = '',
     pattern = /^\s*(\w+)\s*:\s*/,
 ): {type: string, body: string} => {
     if (pattern.global) {
