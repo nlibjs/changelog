@@ -22,7 +22,7 @@ export type CommitGroup =
 
 export const groupCommits = async function* (
     commitIterator: AsyncGenerator<Commit> | Iterable<Commit>,
-    tagPattern = /^v/,
+    tagPattern: RegExp,
 ): AsyncGenerator<CommitGroup> {
     const commits = new Map<string, Array<Commit>>();
     let tagData: TagData | undefined;
