@@ -1,5 +1,32 @@
 # Changelog
 
+## v0.1.2 (2020-09-07)
+
+### Features
+
+- add initialTag option (c2b330a)
+- set initialTag when --head is unset (8a334c7)
+- skip if title is empty (f1b19d7)
+
+### Bug Fixes
+
+- replace testTypeChecker (7852fb5)
+
+### Dependency Upgrades
+
+- upgrade @nlib/typing and husky (cb57838)
+
+
+## v0.1.1 (2020-09-07)
+
+### Bug Fixes
+
+- import source of testTypeChecker (ba5d050)
+
+### Documentation
+
+- add some badges (6b4baa7)
+
 
 ## v0.1.0 (2020-09-07)
 
@@ -53,22 +80,5 @@ this message includes some '\special' characters😉 (b3ec2a6)
 
 - upgrade nlib/typing (974ee5c)
 - upgrade dependencies (404fd8f)
-
-### chore
-
-- fix the version command (5397042)
-- remove rimraf (c594e83)
-- remove a log line (02b8e67)
-- upgrade dependencies (2e4ce9e)
-- update the eslint configuration (0d04a3e)
-- walkCommitHistory (8dd633b)
-- setup (09261b7)
-
-### 
-
-- 0.1.0 (4039a73)
-- Merge pull request #1 from nlibjs/proto
-
-feat: the initial version (8d7cd1c)
 
 
