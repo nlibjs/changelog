@@ -29,9 +29,9 @@
         "test:type": "tsc --noEmit",
         "test:ava": "ava",
         "lint": "eslint --ext .ts --ext .js src",
-        "version:changelog": "ts-node src/cli.ts",
-        "version:add": "git add .",
-        "version": "run-s version:changelog version:add"
+        "version": "run-s version:*",
+        "version:changelog": "ts-node src/cli.ts --output CHANGELOG.md",
+        "version:add": "git add ."
     },
     "dependencies": {
         "@nlib/date": "^0.1.0",
