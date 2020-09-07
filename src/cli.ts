@@ -3,12 +3,19 @@ import * as process from 'process';
 import * as console from 'console';
 import * as path from 'path';
 import * as fs from 'fs';
+import {Date} from '@nlib/global';
 import {
     createCLIArgumentsParser,
     getVersion,
     serializeDefinitionMap,
 } from '@nlib/nodetool';
-import {generateChangelog} from './generateChangelog';
+import {
+    generateChangelog,
+    GenerateChangelogOptions,
+} from './generateChangelog';
+import {getCommit} from './getCommit';
+import {TagData} from './groupCommits';
+import {Commit} from './is/Commit';
 
 const parse = createCLIArgumentsParser({
     output: {
@@ -32,7 +39,22 @@ const parse = createCLIArgumentsParser({
     },
 });
 
-const nlibChangelogCLI = async (
+const getPseudoTagData = (
+    {tag, commit, date = new Date()}: {
+        tag: string,
+        commit: Commit,
+        date?: Date,
+    },
+): TagData => ({
+    tag,
+    commit: {
+        ...commit,
+        author: {...commit.author, date},
+        committer: {...commit.committer, date},
+    },
+});
+
+export const nlibChangelogCLI = async (
     args: Array<string>,
     stdout: NodeJS.WritableStream = process.stdout,
 ) => {
@@ -46,7 +68,16 @@ const nlibChangelogCLI = async (
     } else {
         const props = parse(args);
         const output = fs.createWriteStream(path.resolve(props.output));
-        for await (const fragment of generateChangelog({headCommit: props.head || 'HEAD'})) {
+        const options: GenerateChangelogOptions = {
+            headCommit: props.head,
+        };
+        if (!options.headCommit) {
+            options.initialTag = getPseudoTagData({
+                tag: `v${getVersion(path.join(__dirname, '../package.json'))}`,
+                commit: await getCommit('HEAD'),
+            });
+        }
+        for await (const fragment of generateChangelog(options)) {
             output.write(fragment);
         }
         output.close();

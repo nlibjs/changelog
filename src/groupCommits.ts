@@ -7,7 +7,7 @@ export interface UntaggedCommitGroup {
     commits: Map<string, Array<Commit>>,
 }
 
-interface TagData {
+export interface TagData {
     tag: string,
     commit: Commit,
 }
@@ -20,15 +20,18 @@ export type CommitGroup =
 | UntaggedCommitGroup
 | TaggedCommitGroup;
 
+export const DefaultTagPattern = /^v/;
+
 export const groupCommits = async function* (
     commitIterator: AsyncGenerator<Commit> | Iterable<Commit>,
-    tagPattern: RegExp,
+    tagPattern: RegExp = DefaultTagPattern,
+    initialTag?: TagData,
 ): AsyncGenerator<CommitGroup> {
     const commits = new Map<string, Array<Commit>>();
-    let tagData: TagData | undefined;
+    let tagData = initialTag;
     for await (const commit of commitIterator) {
         const tag = commit.tag.find((t) => tagPattern.test(t));
-        if (tag) {
+        if (tag && (!tagData || tagData.tag !== tag)) {
             if (0 < commits.size) {
                 yield tagData ? {...tagData, commits} : {tag: null, commits};
                 commits.clear();

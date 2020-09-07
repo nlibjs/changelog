@@ -2,7 +2,6 @@ import ava from 'ava';
 import {Date, Map} from '@nlib/global';
 import {Commit} from './is/Commit';
 import {groupCommits} from './groupCommits';
-import {DefaultTagPattern} from './generateChangelog';
 
 const user = {
     date: new Date('2020-09-01T15:00:00Z'),
@@ -35,7 +34,7 @@ ava('group commits', async (t) => {
         {...baseCommit, message: 'build: message8'},
         {...baseCommit, message: 'build: message9'},
     ];
-    const iterator = groupCommits(commits, DefaultTagPattern);
+    const iterator = groupCommits(commits);
     t.deepEqual(await iterator.next(), {
         done: false,
         value: {

@@ -1,10 +1,16 @@
 import {Serializable, serialize} from '@nlib/global';
 import {Commit} from './is/Commit';
-import {groupCommits, CommitGroup} from './groupCommits';
+import {groupCommits, CommitGroup, TagData} from './groupCommits';
 import {serializeCommitGroup} from './serializeCommitGroup';
 import {walkCommitHistory} from './walkCommitHistory';
 
-export const DefaultTagPattern = /^v/;
+export interface GenerateChangelogFromCommitsOptions {
+    serializer?: (commitGroup: CommitGroup) => Serializable,
+    header?: string,
+    footer?: string,
+    tagPattern?: RegExp,
+    initialTag?: TagData,
+}
 
 export const generateChangelogFromCommits = async function* (
     commits: AsyncGenerator<Commit> | Iterable<Commit>,
@@ -12,18 +18,14 @@ export const generateChangelogFromCommits = async function* (
         serializer = serializeCommitGroup,
         header = '# Changelog\n\n',
         footer = '',
-        tagPattern = DefaultTagPattern,
-    }: {
-        serializer?: (commitGroup: CommitGroup) => Serializable,
-        header?: string,
-        footer?: string,
-        tagPattern?: RegExp,
-    } = {},
+        tagPattern,
+        initialTag,
+    }: GenerateChangelogFromCommitsOptions = {},
 ): AsyncGenerator<string> {
     if (header) {
         yield header;
     }
-    for await (const commitGroup of groupCommits(commits, tagPattern)) {
+    for await (const commitGroup of groupCommits(commits, tagPattern, initialTag)) {
         yield* serialize(serializer(commitGroup));
         yield '\n';
     }
@@ -32,13 +34,17 @@ export const generateChangelogFromCommits = async function* (
     }
 };
 
+export interface GenerateChangelogOptions {
+    headCommit?: string,
+    serializer?: (commitGroup: CommitGroup) => Serializable,
+    header?: string,
+    footer?: string,
+    tagPattern?: RegExp,
+    initialTag?: TagData,
+}
+
 export const generateChangelog = async function* (
-    props: {
-        headCommit?: string,
-        serializer?: (commitGroup: CommitGroup) => Generator<string> | string,
-        header?: string,
-        footer?: string,
-    } = {},
+    props: GenerateChangelogOptions = {},
 ): AsyncGenerator<string> {
     yield* generateChangelogFromCommits(walkCommitHistory(props.headCommit), props);
 };
