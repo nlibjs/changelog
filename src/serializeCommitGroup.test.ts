@@ -24,7 +24,6 @@ ava('tagged', (t) => {
         ]),
     });
     const actual = [...generator].join('');
-    t.log(actual);
     t.is(actual, [
         '## foo (2020-08-31)',
         '',
