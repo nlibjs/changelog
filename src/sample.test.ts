@@ -1,5 +1,5 @@
 import {Date} from '@nlib/global';
-import {testTypeCheckerSuccess} from '@nlib/typing/cjs/testTypeChecker';
+import {testFunction} from '@nlib/test';
 import {Commit, isCommit} from './is/Commit';
 
 export const user = {
@@ -17,7 +17,7 @@ export const firstCommit: Commit = {
     committer: {...user, date: new Date('2020-08-31T03:04:05+09:00')},
     message: 'chore: setup',
 };
-testTypeCheckerSuccess(isCommit, firstCommit);
+testFunction(isCommit, {input: firstCommit, expected: true});
 
 export const secondCommit: Commit = {
     tag: ['tag-2', 'tag-1'],
@@ -32,7 +32,7 @@ export const secondCommit: Commit = {
         'this message includes some \'\\special\' characters😉',
     ].join('\n'),
 };
-testTypeCheckerSuccess(isCommit, secondCommit);
+testFunction(isCommit, {input: secondCommit, expected: true});
 
 export const thirdCommit: Commit = {
     tag: [],
@@ -44,7 +44,7 @@ export const thirdCommit: Commit = {
     committer: {...user, date: new Date('2020-08-31T03:08:38+09:00')},
     message: 'feat: add isCommit',
 };
-testTypeCheckerSuccess(isCommit, thirdCommit);
+testFunction(isCommit, {input: thirdCommit, expected: true});
 
 export const thirdCommitLike: Partial<Commit> = {...thirdCommit};
 delete thirdCommitLike.reference;
