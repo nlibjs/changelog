@@ -25,7 +25,9 @@
     },
     "scripts": {
         "build": "tsc",
-        "test": "ava",
+        "test": "run-s test:*",
+        "test:type": "tsc --noEmit",
+        "test:ava": "ava",
         "lint": "eslint --ext .ts --ext .js src",
         "version:changelog": "ts-node src/cli.ts",
         "version:add": "git add .",
