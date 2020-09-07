@@ -37,7 +37,7 @@
         "@nlib/date": "^0.1.0",
         "@nlib/global": "^3.17.15",
         "@nlib/nodetool": "^0.1.8",
-        "@nlib/typing": "^0.1.1"
+        "@nlib/typing": "^0.1.2"
     },
     "devDependencies": {
         "@commitlint/cli": "^9.1.2",
