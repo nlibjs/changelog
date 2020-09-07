@@ -25,7 +25,7 @@ ava('tagged', (t) => {
     });
     const actual = [...generator].join('');
     t.is(actual, [
-        '## foo (2020-08-31)',
+        '## foo (2020-08-30)',
         '',
         '### Features',
         '',
