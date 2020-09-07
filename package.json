@@ -32,23 +32,23 @@
         "prepack": "rimraf 'lib/**/*.test.*'"
     },
     "dependencies": {
-        "@nlib/date": "0.0.3",
-        "@nlib/global": "^3.17.10",
-        "@nlib/typing": "0.0.4"
+        "@nlib/date": "^0.1.0",
+        "@nlib/global": "^3.17.15",
+        "@nlib/typing": "^0.1.1"
     },
     "devDependencies": {
         "@commitlint/cli": "^9.1.2",
         "@commitlint/config-conventional": "^9.1.2",
-        "@nlib/eslint-config": "^3.17.6",
-        "@nlib/test": "^3.17.5",
+        "@nlib/eslint-config": "^3.17.11",
+        "@nlib/test": "^3.18.6",
         "@types/eslint": "^7.2.2",
-        "@typescript-eslint/eslint-plugin": "^3.10.1",
-        "@typescript-eslint/parser": "^3.10.1",
+        "@typescript-eslint/eslint-plugin": "^4.0.1",
+        "@typescript-eslint/parser": "^4.0.1",
         "ava": "^3.12.1",
         "conventional-changelog-cli": "^2.1.0",
-        "eslint": "^7.8.0",
+        "eslint": "^7.8.1",
         "husky": "^4.2.5",
-        "lint-staged": "^10.2.13",
+        "lint-staged": "^10.3.0",
         "npm-run-all": "^4.1.5",
         "rimraf": "^3.0.2",
         "ts-node": "^9.0.0",
@@ -113,7 +113,7 @@
     },
     "commitlint": {
         "extends": [
-            "@commitlint/config-conventional"
+            "@nlib/eslint-config/commitlint.config.js"
         ]
     },
     "husky": {
@@ -132,14 +132,7 @@
     },
     "renovate": {
         "extends": [
-            ":ignoreModulesAndTests",
-            ":unpublishSafe",
-            ":semanticPrefixChore",
-            ":prNotPending",
-            ":prConcurrentLimit10",
-            ":prHourlyLimitNone",
-            ":label(dependencies)",
-            ":automergeMinor"
+            "github>nlibjs/renovate-config"
         ]
     }
 }
