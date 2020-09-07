@@ -46,7 +46,7 @@ const getTitle = (
 
 export const serializeCommit = (
     commit: Commit,
-): string => `- ${commit.message} (${commit.shortHash})\n`;
+): string => `- ${commit.message} (${commit.hash})\n`;
 
 export const serializeCommitGroup = function* (
     group: CommitGroup,
