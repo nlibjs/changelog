@@ -1,5 +1,5 @@
 import {Date} from '@nlib/global';
-import {testTypeCheckerSuccess} from '@nlib/typing';
+import {testTypeCheckerSuccess} from '@nlib/typing/cjs/testTypeChecker';
 import {Commit, isCommit} from './is/Commit';
 
 export const user = {
