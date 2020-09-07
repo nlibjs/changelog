@@ -17,46 +17,48 @@
     },
     "main": "lib/index.js",
     "files": [
-        "lib"
+        "lib",
+        "!*.test.*"
     ],
     "bin": {
         "nlib-changelog": "lib/cli.js"
     },
     "scripts": {
         "build": "tsc",
-        "test": "ava",
+        "test": "run-s test:*",
+        "test:type": "tsc --noEmit",
+        "test:ava": "ava",
         "lint": "eslint --ext .ts --ext .js src",
         "version:changelog": "ts-node src/cli.ts",
         "version:add": "git add .",
-        "version": "run-s version:changelog version:add",
-        "prepack": "rimraf 'lib/**/*.test.*'"
+        "version": "run-s version:changelog version:add"
     },
     "dependencies": {
-        "@nlib/global": "^3.17.8",
-        "@nlib/typing": "0.0.3"
+        "@nlib/date": "^0.1.0",
+        "@nlib/global": "^3.17.15",
+        "@nlib/nodetool": "^0.1.8",
+        "@nlib/typing": "^0.1.1"
     },
     "devDependencies": {
         "@commitlint/cli": "^9.1.2",
         "@commitlint/config-conventional": "^9.1.2",
-        "@nlib/eslint-config": "^3.17.6",
-        "@nlib/test": "^3.17.4",
+        "@nlib/eslint-config": "^3.17.11",
+        "@nlib/test": "^3.18.6",
         "@types/eslint": "^7.2.2",
-        "@typescript-eslint/eslint-plugin": "^3.10.1",
-        "@typescript-eslint/parser": "^3.10.1",
+        "@typescript-eslint/eslint-plugin": "^4.0.1",
+        "@typescript-eslint/parser": "^4.0.1",
         "ava": "^3.12.1",
         "conventional-changelog-cli": "^2.1.0",
-        "eslint": "^7.7.0",
+        "eslint": "^7.8.1",
         "husky": "^4.2.5",
-        "lint-staged": "^10.2.13",
+        "lint-staged": "^10.3.0",
         "npm-run-all": "^4.1.5",
-        "rimraf": "^3.0.2",
         "ts-node": "^9.0.0",
         "typescript": "^4.0.2"
     },
     "ava": {
         "extensions": [
-            "ts",
-            "js"
+            "ts"
         ],
         "require": [
             "ts-node/register"
@@ -72,23 +74,45 @@
         "env": {
             "node": true
         },
-        "rules": {
-            "@nlib/restrict-globals": "error"
-        },
         "overrides": [
+            {
+                "files": [
+                    "*.test.ts"
+                ],
+                "rules": {
+                    "max-lines-per-function": "off"
+                }
+            },
             {
                 "files": [
                     "src/cli.ts"
                 ],
                 "rules": {
-                    "no-console": "off"
+                    "no-console": "off",
+                    "@nlib/no-globals": [
+                        "error",
+                        {
+                            "allowed": [
+                                "__dirname",
+                                "module"
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "files": [
+                    "src/serializeCommitGroup.ts"
+                ],
+                "rules": {
+                    "new-cap": "off"
                 }
             }
         ]
     },
     "commitlint": {
         "extends": [
-            "@commitlint/config-conventional"
+            "@nlib/eslint-config/commitlint.config.js"
         ]
     },
     "husky": {
@@ -107,14 +131,7 @@
     },
     "renovate": {
         "extends": [
-            ":ignoreModulesAndTests",
-            ":unpublishSafe",
-            ":semanticPrefixChore",
-            ":prNotPending",
-            ":prConcurrentLimit10",
-            ":prHourlyLimitNone",
-            ":label(dependencies)",
-            ":automergeMinor"
+            "github>nlibjs/renovate-config"
         ]
     }
 }
