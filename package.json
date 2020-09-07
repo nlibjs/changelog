@@ -17,7 +17,8 @@
     },
     "main": "lib/index.js",
     "files": [
-        "lib"
+        "lib",
+        "!*.test.*"
     ],
     "bin": {
         "nlib-changelog": "lib/cli.js"
@@ -28,8 +29,7 @@
         "lint": "eslint --ext .ts --ext .js src",
         "version:changelog": "ts-node src/cli.ts",
         "version:add": "git add .",
-        "version": "run-s version:changelog version:add",
-        "prepack": "rimraf 'lib/**/*.test.*'"
+        "version": "run-s version:changelog version:add"
     },
     "dependencies": {
         "@nlib/date": "^0.1.0",
@@ -50,7 +50,6 @@
         "husky": "^4.2.5",
         "lint-staged": "^10.3.0",
         "npm-run-all": "^4.1.5",
-        "rimraf": "^3.0.2",
         "ts-node": "^9.0.0",
         "typescript": "^4.0.2"
     },
