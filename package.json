@@ -71,9 +71,6 @@
         "env": {
             "node": true
         },
-        "rules": {
-            "@nlib/restrict-globals": "error"
-        },
         "overrides": [
             {
                 "files": [
@@ -89,7 +86,7 @@
                 ],
                 "rules": {
                     "no-console": "off",
-                    "@nlib/restrict-globals": [
+                    "@nlib/no-globals": [
                         "error",
                         {
                             "allowed": [

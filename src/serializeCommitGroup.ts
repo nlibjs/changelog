@@ -1,5 +1,5 @@
 import {serialize, Serializable} from '@nlib/global';
-import {ISO8601DATE} from '@nlib/date';
+import {uISO8601DATE} from '@nlib/date';
 import {CommitGroup} from './groupCommits';
 import {Commit} from './is/Commit';
 
@@ -59,7 +59,7 @@ export const serializeCommitGroup = function* (
     } = {},
 ): Generator<string> {
     if (group.tag) {
-        yield `## ${group.tag} (${ISO8601DATE(group.commit.committer.date)})\n\n`;
+        yield `## ${group.tag} (${uISO8601DATE(group.commit.committer.date)})\n\n`;
         for (const [type, commitList] of [...group.commits].sort(([a], [b]): number => getPriority(a, types) < getPriority(b, types) ? 1 : -1)) {
             yield `### ${getTitle(type, types)}\n\n`;
             for (const commit of commitList) {
