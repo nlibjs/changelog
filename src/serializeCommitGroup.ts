@@ -35,13 +35,13 @@ const getPriority = (
 const getTitle = (
     type: string,
     Information = CommitTypeInformation,
-): string => {
+): string | null => {
     for (const {prefix, title} of Information) {
         if (type.startsWith(prefix)) {
             return title;
         }
     }
-    return type;
+    return null;
 };
 
 export const serializeCommit = (
@@ -61,11 +61,14 @@ export const serializeCommitGroup = function* (
     if (group.tag) {
         yield `## ${group.tag} (${uISO8601DATE(group.commit.committer.date)})\n\n`;
         for (const [type, commitList] of [...group.commits].sort(([a], [b]): number => getPriority(a, types) < getPriority(b, types) ? 1 : -1)) {
-            yield `### ${getTitle(type, types)}\n\n`;
-            for (const commit of commitList) {
-                yield* serialize(serializer(commit));
+            const title = getTitle(type, types);
+            if (title) {
+                yield `### ${getTitle(type, types)}\n\n`;
+                for (const commit of commitList) {
+                    yield* serialize(serializer(commit));
+                }
+                yield '\n';
             }
-            yield '\n';
         }
     }
 };

@@ -21,6 +21,7 @@ ava('tagged', (t) => {
         commits: new Map([
             ['test', [thirdCommit, firstCommit]],
             ['feat', [firstCommit, thirdCommit]],
+            ['foo', [firstCommit, thirdCommit]],
         ]),
     });
     const actual = [...generator].join('');
