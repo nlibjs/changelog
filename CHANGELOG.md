@@ -1,9 +1,13 @@
 # Changelog
 
+## v0.1.5 (2020-09-07)
+
+### Dependency Upgrades
+
+- @nlib/date@0.1.1 (ca84cea)
+
+
 ## v0.1.4 (2020-09-07)
-
-
-## v0.1.3 (2020-09-07)
 
 ### Bug Fixes
 
