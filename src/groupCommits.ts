@@ -27,7 +27,7 @@ export const groupCommits = async function* (
     const commits = new Map<string, Array<Commit>>();
     let tagData: TagData | undefined;
     for await (const commit of commitIterator) {
-        const tag = commit.tag.find((tag) => tagPattern.test(tag));
+        const tag = commit.tag.find((t) => tagPattern.test(t));
         if (tag) {
             if (0 < commits.size) {
                 yield tagData ? {...tagData, commits} : {tag: null, commits};
