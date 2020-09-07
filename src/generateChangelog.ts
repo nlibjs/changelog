@@ -25,7 +25,7 @@ export const generateChangelogFromCommits = async function* (
     if (header) {
         yield header;
     }
-    for await (const commitGroup of groupCommits(commits, tagPattern, initialTag)) {
+    for await (const commitGroup of groupCommits(commits, {tagPattern, initialTag})) {
         yield* serialize(serializer(commitGroup));
         yield '\n';
     }

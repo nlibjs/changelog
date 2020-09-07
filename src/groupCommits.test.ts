@@ -94,3 +94,59 @@ ava('group commits', async (t) => {
         done: true,
     });
 });
+
+ava('initialTag', async (t) => {
+    const commits: Array<Commit> = [
+        {...baseCommit},
+        {...baseCommit, message: 'feat: message1'},
+        {...baseCommit, message: 'v1.0.0', tag: ['v1.0.0']},
+        {...baseCommit, message: 'ci: message2'},
+    ];
+    const iterator1 = groupCommits(
+        commits,
+        {initialTag: {commit: baseCommit, tag: 'v1.0.1'}},
+    );
+    t.deepEqual(await iterator1.next(), {
+        done: false,
+        value: {
+            tag: 'v1.0.1',
+            commit: {...baseCommit},
+            commits: new Map([
+                ['', [{...baseCommit}]],
+                ['feat', [{...baseCommit, message: 'message1'}]],
+            ]),
+        },
+    });
+    t.deepEqual(await iterator1.next(), {
+        done: false,
+        value: {
+            tag: 'v1.0.0',
+            commit: {...baseCommit, message: 'v1.0.0', tag: ['v1.0.0']},
+            commits: new Map([
+                ['', [{...baseCommit, message: 'v1.0.0', tag: ['v1.0.0']}]],
+                ['ci', [{...baseCommit, message: 'message2'}]],
+            ]),
+        },
+    });
+    t.like(await iterator1.next(), {done: true});
+    const iterator2 = groupCommits(
+        commits,
+        {initialTag: {commit: baseCommit, tag: 'v1.0.0'}},
+    );
+    t.deepEqual(await iterator2.next(), {
+        done: false,
+        value: {
+            tag: 'v1.0.0',
+            commit: {...baseCommit, message: 'v1.0.0', tag: ['v1.0.0']},
+            commits: new Map([
+                ['', [
+                    {...baseCommit},
+                    {...baseCommit, message: 'v1.0.0', tag: ['v1.0.0']},
+                ]],
+                ['feat', [{...baseCommit, message: 'message1'}]],
+                ['ci', [{...baseCommit, message: 'message2'}]],
+            ]),
+        },
+    });
+    t.like(await iterator2.next(), {done: true});
+});
