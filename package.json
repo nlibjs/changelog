@@ -94,7 +94,8 @@
                         {
                             "allowed": [
                                 "__dirname",
-                                "require"
+                                "require",
+                                "module"
                             ]
                         }
                     ]

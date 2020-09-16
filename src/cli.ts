@@ -84,7 +84,7 @@ export const nlibChangelogCLI = async (
     }
 };
 
-if (!require.main) {
+if (require.main === module) {
     nlibChangelogCLI(process.argv.slice(2))
     .catch((error) => {
         console.error(error);
