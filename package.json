@@ -105,6 +105,22 @@
             },
             {
                 "files": [
+                    "src/cli.test.ts"
+                ],
+                "rules": {
+                    "no-console": "off",
+                    "@nlib/no-globals": [
+                        "error",
+                        {
+                            "allowed": [
+                                "__dirname"
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "files": [
                     "src/serializeCommitGroup.ts"
                 ],
                 "rules": {
