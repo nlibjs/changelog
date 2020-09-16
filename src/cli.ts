@@ -19,7 +19,7 @@ import {Commit} from './is/Commit';
 
 const parse = createCLIArgumentsParser({
     output: {
-        type: 'string',
+        type: 'string?',
         alias: 'o',
         description: 'A file path nlib-changelog writes to',
     },
@@ -59,7 +59,7 @@ export const nlibChangelogCLI = async (
     stdout: NodeJS.WritableStream = process.stdout,
 ) => {
     if (args.includes('--help') || args.includes('-h')) {
-        stdout.write('cleanup-package-json --file path/to/package.json\n\n');
+        stdout.write('nlib-changelog --output path/to/changelog.md\n\n');
         for (const help of serializeDefinitionMap(parse.definition)) {
             stdout.write(help);
         }
@@ -67,7 +67,7 @@ export const nlibChangelogCLI = async (
         stdout.write(`${getVersion(path.join(__dirname, '../package.json'))}\n`);
     } else {
         const props = parse(args);
-        const output = fs.createWriteStream(path.resolve(props.output));
+        const output: NodeJS.WritableStream = props.output ? fs.createWriteStream(path.resolve(props.output)) : process.stdout;
         const options: GenerateChangelogOptions = {
             headCommit: props.head,
         };
@@ -80,11 +80,11 @@ export const nlibChangelogCLI = async (
         for await (const fragment of generateChangelog(options)) {
             output.write(fragment);
         }
-        output.close();
+        output.end();
     }
 };
 
-if (!require.main) {
+if (require.main === module) {
     nlibChangelogCLI(process.argv.slice(2))
     .catch((error) => {
         console.error(error);
