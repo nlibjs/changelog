@@ -24,7 +24,9 @@
         "nlib-changelog": "lib/cli.js"
     },
     "scripts": {
-        "build": "tsc",
+        "build": "run-s build:*",
+        "build:index": "indexen --input src --output src/index.ts",
+        "build:tsc": "tsc",
         "test": "run-s test:*",
         "test:type": "tsc --noEmit",
         "test:ava": "ava",
