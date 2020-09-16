@@ -1,6 +1,6 @@
 import {ensure} from '@nlib/typing';
 import {Date} from '@nlib/global';
-import {exec} from './exec';
+import {exec} from '@nlib/nodetool';
 import {isCommit, Commit} from './is/Commit';
 import {parseRefNames} from './parseRefNames';
 
