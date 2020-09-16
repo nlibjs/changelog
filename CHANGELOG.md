@@ -1,5 +1,51 @@
 # Changelog
 
+## v0.1.7 (2020-09-16)
+
+### Features
+
+- output to stdout if --output is empty (4d79f15)
+
+### Bug Fixes
+
+- use require.main === module (8553875)
+
+### Tests
+
+- cli execution (7438f6d)
+
+### Code Refactoring
+
+- use exec() from @nlib/nodetool (0861111)
+
+### Documentation
+
+- fix the help output (29d91b5)
+
+### Build System
+
+- generate index automatically (6382298)
+
+### Continuous Integration
+
+- cleanup package.json before publish (7734182)
+
+### Dependency Upgrades
+
+- @nlib/nodetool@0.1.10 (4bfa5db)
+
+
+## v0.1.6 (2020-09-15)
+
+### Code Refactoring
+
+- replace module.parent with require.main (e8dafa3)
+
+### Dependency Upgrades
+
+- upgrade dependencies (2f35c9d)
+
+
 ## v0.1.5 (2020-09-07)
 
 ### Dependency Upgrades
