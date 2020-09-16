@@ -59,7 +59,7 @@ export const nlibChangelogCLI = async (
     stdout: NodeJS.WritableStream = process.stdout,
 ) => {
     if (args.includes('--help') || args.includes('-h')) {
-        stdout.write('cleanup-package-json --file path/to/package.json\n\n');
+        stdout.write('nlib-changelog --output path/to/changelog.md\n\n');
         for (const help of serializeDefinitionMap(parse.definition)) {
             stdout.write(help);
         }
