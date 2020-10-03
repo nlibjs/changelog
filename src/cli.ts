@@ -73,7 +73,7 @@ export const nlibChangelogCLI = async (
         };
         if (!options.headCommit) {
             options.initialTag = getPseudoTagData({
-                tag: `v${getVersion(path.join(__dirname, '../package.json'))}`,
+                tag: `v${getVersion(path.resolve('package.json'))}`,
                 commit: await getCommit('HEAD'),
             });
         }
