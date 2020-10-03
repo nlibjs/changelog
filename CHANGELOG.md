@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.8 (2020-10-03)
+
+### Bug Fixes
+
+- get initial version from cwd/package.json (3568127)
+
+### Dependency Upgrades
+
+- install @types/node (c249371)
+- install @nlib/lint-commit (977ce7d)
+
+
 ## v0.1.7 (2020-09-16)
 
 ### Features
