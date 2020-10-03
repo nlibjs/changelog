@@ -129,11 +129,6 @@
             }
         ]
     },
-    "commitlint": {
-        "extends": [
-            "@nlib/eslint-config/commitlint.config.js"
-        ]
-    },
     "husky": {
         "hooks": {
             "commit-msg": "nlib-lint-commit --input HUSKY_GIT_PARAMS",
