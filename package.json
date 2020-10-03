@@ -37,26 +37,25 @@
     },
     "dependencies": {
         "@nlib/date": "^0.1.1",
-        "@nlib/global": "^3.17.15",
+        "@nlib/global": "^3.18.0",
         "@nlib/nodetool": "^0.1.10",
         "@nlib/typing": "^0.1.4"
     },
     "devDependencies": {
-        "@commitlint/cli": "^11.0.0",
-        "@commitlint/config-conventional": "^11.0.0",
         "@nlib/eslint-config": "^3.17.12",
+        "@nlib/lint-commit": "^0.1.3",
         "@nlib/test": "^3.18.6",
-        "@types/eslint": "^7.2.2",
-        "@typescript-eslint/eslint-plugin": "^4.1.1",
-        "@typescript-eslint/parser": "^4.1.1",
-        "ava": "^3.12.1",
+        "@types/eslint": "^7.2.3",
+        "@typescript-eslint/eslint-plugin": "^4.3.0",
+        "@typescript-eslint/parser": "^4.3.0",
+        "ava": "^3.13.0",
         "conventional-changelog-cli": "^2.1.0",
-        "eslint": "^7.9.0",
+        "eslint": "^7.10.0",
         "husky": "^4.3.0",
-        "lint-staged": "^10.3.0",
+        "lint-staged": "^10.4.0",
         "npm-run-all": "^4.1.5",
         "ts-node": "^9.0.0",
-        "typescript": "^4.0.2"
+        "typescript": "^4.0.3"
     },
     "ava": {
         "extensions": [
@@ -136,7 +135,7 @@
     },
     "husky": {
         "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "commit-msg": "nlib-lint-commit --input HUSKY_GIT_PARAMS",
             "pre-commit": "lint-staged"
         }
     },
