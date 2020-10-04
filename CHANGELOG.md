@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.1.9 (2020-10-04)
+
+### Features
+
+- add DefaultTypeAliases (d84f4ca)
+- add --alias argument (2d6ac20)
+- add parseTypeAliases (ad0003a)
+- add ExtractCommitTypeProps (8af17ee)
+
+### Bug Fixes
+
+- update index (cb79769)
+- dep → deps (e6c73e7)
+
+### Tests
+
+- --head (1744f8c)
+
+### Dependency Upgrades
+
+- upgrade dependencies (974dbc1)
+
+
 ## v0.1.8 (2020-10-03)
 
 ### Bug Fixes
@@ -116,8 +139,7 @@
 - add parseUnquotedCSVLine (2ce53a3)
 - add type checkers (4a6542d)
 - add isCommit (4f25e7e)
-- add the "exec" function
-this message includes some '\special' characters😉 (b3ec2a6)
+- add the "exec" function (b3ec2a6)
 
 ### Bug Fixes
 
