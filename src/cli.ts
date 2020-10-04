@@ -10,6 +10,7 @@ import {getCommit} from './getCommit';
 import {TagData} from './groupCommits';
 import {Commit} from './is/Commit';
 import {parseTypeAliases} from './parseTypeAliases';
+import {DefaultTypeAliases} from './serializeCommitGroup';
 
 const parse = createCLIArgumentsParser({
     output: {
@@ -68,7 +69,7 @@ export const nlibChangelogCLI = async (
         const props = parse(args);
         const output: NodeJS.WritableStream = props.output ? fs.createWriteStream(path.resolve(props.output)) : process.stdout;
         const options: GenerateChangelogProps = {
-            aliases: new Map([...parseTypeAliases(props.alias)]),
+            aliases: 0 < props.alias.length ? new Map(parseTypeAliases(props.alias)) : DefaultTypeAliases,
         };
         if (!props.head) {
             options.initialTag = getPseudoTagData({
