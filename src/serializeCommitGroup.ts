@@ -15,7 +15,7 @@ export const CommitTypeInformation = [
     {prefix: 'docs', title: 'Documentation'},
     {prefix: 'build', title: 'Build System'},
     {prefix: 'ci', title: 'Continuous Integration'},
-    {prefix: 'dep', title: 'Dependency Upgrades'},
+    {prefix: 'deps', title: 'Dependency Upgrades'},
 ];
 
 const getPriority = (
