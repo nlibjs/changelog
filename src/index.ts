@@ -8,6 +8,7 @@ export * from './is/Commit';
 export * from './is/CommitAuthor';
 export * from './is/CommitCommitter';
 export * from './parseRefNames';
+export * from './parseTypeAliases';
 export * from './parseUnquotedCSVLine';
 export * from './serializeCommitGroup';
 export * from './walkCommitHistory';
