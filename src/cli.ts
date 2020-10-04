@@ -3,19 +3,13 @@ import * as process from 'process';
 import * as console from 'console';
 import * as path from 'path';
 import * as fs from 'fs';
-import {Date} from '@nlib/global';
-import {
-    createCLIArgumentsParser,
-    getVersion,
-    serializeDefinitionMap,
-} from '@nlib/nodetool';
-import {
-    generateChangelog,
-    GenerateChangelogOptions,
-} from './generateChangelog';
+import {Date, Map} from '@nlib/global';
+import {createCLIArgumentsParser, getVersion, serializeDefinitionMap} from '@nlib/nodetool';
+import {generateChangelog, GenerateChangelogProps} from './generateChangelog';
 import {getCommit} from './getCommit';
 import {TagData} from './groupCommits';
 import {Commit} from './is/Commit';
+import {parseTypeAliases} from './parseTypeAliases';
 
 const parse = createCLIArgumentsParser({
     output: {
@@ -25,6 +19,11 @@ const parse = createCLIArgumentsParser({
     },
     head: {
         type: 'string?',
+        description: 'Specify the head commitish',
+    },
+    alias: {
+        type: 'string[]?',
+        alias: 'a',
         description: 'Specify the head commitish',
     },
     help: {
@@ -68,16 +67,16 @@ export const nlibChangelogCLI = async (
     } else {
         const props = parse(args);
         const output: NodeJS.WritableStream = props.output ? fs.createWriteStream(path.resolve(props.output)) : process.stdout;
-        const options: GenerateChangelogOptions = {
-            headCommit: props.head,
+        const options: GenerateChangelogProps = {
+            aliases: new Map([...parseTypeAliases(props.alias)]),
         };
-        if (!options.headCommit) {
+        if (!props.head) {
             options.initialTag = getPseudoTagData({
                 tag: `v${getVersion(path.resolve('package.json'))}`,
                 commit: await getCommit('HEAD'),
             });
         }
-        for await (const fragment of generateChangelog(options)) {
+        for await (const fragment of generateChangelog(props.head, options)) {
             output.write(fragment);
         }
         output.end();

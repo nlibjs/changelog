@@ -1,5 +1,9 @@
 import {readLine} from '@nlib/global';
 
+export const isValidType = (
+    input: string,
+): input is string => (/^[\w-]+$/).test(input);
+
 export interface ExtractCommitTypeProps {
     empty?: string,
     aliases?: Map<string, string>,
@@ -14,7 +18,7 @@ export const extractCommitType = (
     if (0 <= colonIndex) {
         const typePart = line.slice(0, colonIndex);
         const type = typePart.trim();
-        if ((/^[\w-]+$/).test(type)) {
+        if (isValidType(type)) {
             return {
                 type: (props.aliases && props.aliases.get(type)) || type,
                 body: line.slice(typePart.length + 1).trim(),

@@ -1,6 +1,6 @@
 import {Map} from '@nlib/global';
 import {Commit} from './is/Commit';
-import {extractCommitType} from './extractCommitType';
+import {extractCommitType, ExtractCommitTypeProps} from './extractCommitType';
 
 export interface UntaggedCommitGroup {
     tag: null,
@@ -22,18 +22,18 @@ export type CommitGroup =
 
 export const DefaultTagPattern = /^v/;
 
+export interface GroupCommitsProps extends ExtractCommitTypeProps {
+    tagPattern?: RegExp,
+    initialTag?: TagData,
+}
+
 export const groupCommits = async function* (
     commitIterator: AsyncGenerator<Commit> | Iterable<Commit>,
-    {
-        tagPattern = DefaultTagPattern,
-        initialTag,
-    }: {
-        tagPattern?: RegExp,
-        initialTag?: TagData,
-    } = {},
+    props: GroupCommitsProps = {},
 ): AsyncGenerator<CommitGroup> {
     const commits = new Map<string, Array<Commit>>();
-    let tagData = initialTag;
+    const tagPattern = props.tagPattern || DefaultTagPattern;
+    let tagData = props.initialTag;
     for await (const commit of commitIterator) {
         const tag = commit.tag.find((t) => tagPattern.test(t));
         if (tag) {
@@ -47,7 +47,7 @@ export const groupCommits = async function* (
                 tagData = {tag, commit};
             }
         }
-        const {type, body} = extractCommitType(commit.message);
+        const {type, body} = extractCommitType(commit.message, props);
         let list = commits.get(type);
         if (!list) {
             list = [];
