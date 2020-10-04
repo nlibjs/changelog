@@ -36,13 +36,13 @@
         "version:add": "git add ."
     },
     "dependencies": {
-        "@nlib/date": "^0.1.1",
+        "@nlib/date": "^0.1.2",
         "@nlib/global": "^3.18.0",
-        "@nlib/nodetool": "^0.1.10",
+        "@nlib/nodetool": "^0.1.11",
         "@nlib/typing": "^0.1.4"
     },
     "devDependencies": {
-        "@nlib/eslint-config": "^3.17.12",
+        "@nlib/eslint-config": "^3.17.14",
         "@nlib/lint-commit": "^0.1.3",
         "@nlib/test": "^3.18.6",
         "@types/eslint": "^7.2.3",
