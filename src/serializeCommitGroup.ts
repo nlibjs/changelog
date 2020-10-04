@@ -1,7 +1,20 @@
-import {serialize, Serializable} from '@nlib/global';
+import {serialize, Serializable, Map} from '@nlib/global';
 import {uISO8601DATE} from '@nlib/date';
 import {CommitGroup} from './groupCommits';
 import {Commit} from './is/Commit';
+
+export const DefaultTypeAliases = new Map([
+    ['breaking', 'break'],
+    ['feature', 'feat'],
+    ['performance', 'perf'],
+    ['refactoring', 'refactor'],
+    ['document', 'docs'],
+    ['documents', 'docs'],
+    ['doc', 'docs'],
+    ['dependency', 'deps'],
+    ['dependencies', 'deps'],
+    ['dep', 'deps'],
+]);
 
 export const CommitTypeInformation = [
     {prefix: 'break', title: 'Breaking Changes'},
@@ -15,7 +28,7 @@ export const CommitTypeInformation = [
     {prefix: 'docs', title: 'Documentation'},
     {prefix: 'build', title: 'Build System'},
     {prefix: 'ci', title: 'Continuous Integration'},
-    {prefix: 'dep', title: 'Dependency Upgrades'},
+    {prefix: 'deps', title: 'Dependency Upgrades'},
 ];
 
 const getPriority = (
