@@ -39,7 +39,7 @@
         "@nlib/date": "^0.1.2",
         "@nlib/global": "^3.18.0",
         "@nlib/nodetool": "^0.1.11",
-        "@nlib/typing": "^0.1.4"
+        "@nlib/typing": "^0.2.0"
     },
     "devDependencies": {
         "@nlib/eslint-config": "^3.17.14",
