@@ -38,7 +38,7 @@
     "dependencies": {
         "@nlib/date": "0.1.2",
         "@nlib/global": "3.18.0",
-        "@nlib/nodetool": "0.1.11",
+        "@nlib/nodetool": "0.1.17",
         "@nlib/typing": "0.2.0"
     },
     "devDependencies": {
