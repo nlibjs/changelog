@@ -42,7 +42,7 @@
         "@nlib/typing": "0.2.0"
     },
     "devDependencies": {
-        "@nlib/eslint-config": "3.17.16",
+        "@nlib/eslint-config": "3.17.22",
         "@nlib/lint-commit": "0.1.4",
         "@nlib/test": "3.18.7",
         "@types/eslint": "7.2.10",
