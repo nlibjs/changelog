@@ -26,7 +26,7 @@
     "scripts": {
         "build": "run-s build:*",
         "build:index": "indexen --input src --output src/index.ts",
-        "build:tsc": "tsc",
+        "build:tsc": "tsc --project tsconfig.build.json",
         "test": "run-s test:*",
         "test:type": "tsc --noEmit",
         "test:ava": "ava",
@@ -42,7 +42,8 @@
         "@nlib/typing": "0.2.0"
     },
     "devDependencies": {
-        "@nlib/eslint-config": "3.17.16",
+        "@nlib/eslint-config": "3.17.22",
+        "@nlib/githooks": "0.0.5",
         "@nlib/lint-commit": "0.1.4",
         "@nlib/test": "3.18.7",
         "@types/eslint": "7.2.10",
@@ -50,90 +51,11 @@
         "@typescript-eslint/eslint-plugin": "4.22.1",
         "@typescript-eslint/parser": "4.22.1",
         "ava": "3.15.0",
-        "conventional-changelog-cli": "2.1.1",
         "eslint": "7.25.0",
-        "husky": "4.3.8",
-        "lint-staged": "10.5.4",
+        "lint-staged": "11.0.0",
         "npm-run-all": "4.1.5",
         "ts-node": "9.1.1",
         "typescript": "4.2.4"
-    },
-    "ava": {
-        "extensions": [
-            "ts"
-        ],
-        "require": [
-            "ts-node/register"
-        ],
-        "files": [
-            "!**/*.module.ts"
-        ]
-    },
-    "eslintConfig": {
-        "extends": [
-            "@nlib/eslint-config"
-        ],
-        "env": {
-            "node": true
-        },
-        "overrides": [
-            {
-                "files": [
-                    "*.test.ts"
-                ],
-                "rules": {
-                    "max-lines-per-function": "off"
-                }
-            },
-            {
-                "files": [
-                    "src/cli.ts"
-                ],
-                "rules": {
-                    "no-console": "off",
-                    "@nlib/no-globals": [
-                        "error",
-                        {
-                            "allowed": [
-                                "__dirname",
-                                "require",
-                                "module"
-                            ]
-                        }
-                    ]
-                }
-            },
-            {
-                "files": [
-                    "src/cli.test.ts"
-                ],
-                "rules": {
-                    "no-console": "off",
-                    "@nlib/no-globals": [
-                        "error",
-                        {
-                            "allowed": [
-                                "__dirname"
-                            ]
-                        }
-                    ]
-                }
-            },
-            {
-                "files": [
-                    "src/serializeCommitGroup.ts"
-                ],
-                "rules": {
-                    "new-cap": "off"
-                }
-            }
-        ]
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "nlib-lint-commit --input HUSKY_GIT_PARAMS",
-            "pre-commit": "lint-staged"
-        }
     },
     "lint-staged": {
         "*.ts": [

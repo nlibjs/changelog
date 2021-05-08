@@ -1,6 +1,7 @@
 import {Map} from '@nlib/global';
-import {Commit} from './is/Commit';
-import {extractCommitType, ExtractCommitTypeProps} from './extractCommitType';
+import type {Commit} from './is/Commit';
+import type {ExtractCommitTypeProps} from './extractCommitType';
+import {extractCommitType} from './extractCommitType';
 
 export interface UntaggedCommitGroup {
     tag: null,
@@ -17,8 +18,7 @@ export interface TaggedCommitGroup extends TagData {
 }
 
 export type CommitGroup =
-| UntaggedCommitGroup
-| TaggedCommitGroup;
+TaggedCommitGroup | UntaggedCommitGroup;
 
 export const DefaultTagPattern = /^v/;
 

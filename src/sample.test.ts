@@ -1,6 +1,7 @@
 import {Date} from '@nlib/global';
 import {testFunction} from '@nlib/test';
-import {Commit, isCommit} from './is/Commit';
+import type {Commit} from './is/Commit';
+import {isCommit} from './is/Commit';
 
 export const user = {
     name: 'Kei Ito',

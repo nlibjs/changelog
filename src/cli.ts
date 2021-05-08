@@ -3,12 +3,14 @@ import * as process from 'process';
 import * as console from 'console';
 import * as path from 'path';
 import * as fs from 'fs';
+import type * as stream from 'stream';
 import {Date, Map} from '@nlib/global';
 import {createCLIArgumentsParser, getVersion, serializeDefinitionMap} from '@nlib/nodetool';
-import {generateChangelog, GenerateChangelogProps} from './generateChangelog';
+import type {GenerateChangelogProps} from './generateChangelog';
+import {generateChangelog} from './generateChangelog';
 import {getCommit} from './getCommit';
-import {TagData} from './groupCommits';
-import {Commit} from './is/Commit';
+import type {TagData} from './groupCommits';
+import type {Commit} from './is/Commit';
 import {parseTypeAliases} from './parseTypeAliases';
 import {DefaultTypeAliases} from './serializeCommitGroup';
 
@@ -56,7 +58,7 @@ const getPseudoTagData = (
 
 export const nlibChangelogCLI = async (
     args: Array<string>,
-    stdout: NodeJS.WritableStream = process.stdout,
+    stdout: stream.Writable = process.stdout,
 ) => {
     if (args.includes('--help') || args.includes('-h')) {
         stdout.write('nlib-changelog --output path/to/changelog.md\n\n');
@@ -67,7 +69,7 @@ export const nlibChangelogCLI = async (
         stdout.write(`${getVersion(path.join(__dirname, '../package.json'))}\n`);
     } else {
         const props = parse(args);
-        const output: NodeJS.WritableStream = props.output ? fs.createWriteStream(path.resolve(props.output)) : process.stdout;
+        const output: stream.Writable = props.output ? fs.createWriteStream(path.resolve(props.output)) : process.stdout;
         const options: GenerateChangelogProps = {
             aliases: 0 < props.alias.length ? new Map(parseTypeAliases(props.alias)) : DefaultTypeAliases,
         };

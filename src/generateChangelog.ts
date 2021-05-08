@@ -1,6 +1,8 @@
-import {Serializable, serialize} from '@nlib/global';
-import {Commit} from './is/Commit';
-import {groupCommits, CommitGroup, TagData, GroupCommitsProps} from './groupCommits';
+import type {Serializable} from '@nlib/global';
+import {serialize} from '@nlib/global';
+import type {Commit} from './is/Commit';
+import type {CommitGroup, TagData, GroupCommitsProps} from './groupCommits';
+import {groupCommits} from './groupCommits';
 import {serializeCommitGroup} from './serializeCommitGroup';
 import {walkCommitHistory} from './walkCommitHistory';
 
