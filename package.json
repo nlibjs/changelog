@@ -68,66 +68,6 @@
             "!**/*.module.ts"
         ]
     },
-    "eslintConfig": {
-        "extends": [
-            "@nlib/eslint-config"
-        ],
-        "env": {
-            "node": true
-        },
-        "overrides": [
-            {
-                "files": [
-                    "*.test.ts"
-                ],
-                "rules": {
-                    "max-lines-per-function": "off"
-                }
-            },
-            {
-                "files": [
-                    "src/cli.ts"
-                ],
-                "rules": {
-                    "no-console": "off",
-                    "@nlib/no-globals": [
-                        "error",
-                        {
-                            "allowed": [
-                                "__dirname",
-                                "require",
-                                "module"
-                            ]
-                        }
-                    ]
-                }
-            },
-            {
-                "files": [
-                    "src/cli.test.ts"
-                ],
-                "rules": {
-                    "no-console": "off",
-                    "@nlib/no-globals": [
-                        "error",
-                        {
-                            "allowed": [
-                                "__dirname"
-                            ]
-                        }
-                    ]
-                }
-            },
-            {
-                "files": [
-                    "src/serializeCommitGroup.ts"
-                ],
-                "rules": {
-                    "new-cap": "off"
-                }
-            }
-        ]
-    },
     "husky": {
         "hooks": {
             "commit-msg": "nlib-lint-commit --input HUSKY_GIT_PARAMS",
