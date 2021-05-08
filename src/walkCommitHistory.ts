@@ -1,5 +1,5 @@
 import {getCommit} from './getCommit';
-import {Commit} from './is/Commit';
+import type {Commit} from './is/Commit';
 
 export const walkCommitHistory = async function* (
     startCommitish = 'HEAD',

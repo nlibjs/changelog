@@ -19,11 +19,5 @@
             "@nlib/test": ["@nlib/test/esm"]
         },
         "outDir": "lib"
-    },
-    "include": [
-        "./src"
-    ],
-    "exclude": [
-        "./src/**/*.test.ts"
-    ]
+    }
 }

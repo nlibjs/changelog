@@ -1,7 +1,7 @@
 import ava from 'ava';
 import {Map} from '@nlib/global';
 import {serializeCommitGroup} from './serializeCommitGroup';
-import {Commit} from './is/Commit';
+import type {Commit} from './is/Commit';
 import {thirdCommit, firstCommit} from './sample.test';
 
 ava('empty tag', (t) => {

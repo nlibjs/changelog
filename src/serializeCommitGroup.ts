@@ -1,7 +1,8 @@
-import {serialize, Serializable, Map} from '@nlib/global';
+import type {Serializable} from '@nlib/global';
+import {serialize, Map} from '@nlib/global';
 import {uISO8601DATE} from '@nlib/date';
-import {CommitGroup} from './groupCommits';
-import {Commit} from './is/Commit';
+import type {CommitGroup} from './groupCommits';
+import type {Commit} from './is/Commit';
 
 export const DefaultTypeAliases = new Map([
     ['breaking', 'break'],
