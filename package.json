@@ -47,7 +47,7 @@
         "@nlib/lint-commit": "0.1.4",
         "@nlib/test": "3.18.7",
         "@types/eslint": "7.2.10",
-        "@types/node": "15.3.0",
+        "@types/node": "15.6.0",
         "@typescript-eslint/eslint-plugin": "4.24.0",
         "@typescript-eslint/parser": "4.24.0",
         "ava": "3.15.0",
