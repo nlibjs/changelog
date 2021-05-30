@@ -46,7 +46,7 @@
         "@nlib/githooks": "0.0.5",
         "@nlib/lint-commit": "0.1.4",
         "@nlib/test": "3.18.7",
-        "@types/eslint": "7.2.11",
+        "@types/eslint": "7.2.12",
         "@types/node": "15.6.1",
         "@typescript-eslint/eslint-plugin": "4.25.0",
         "@typescript-eslint/parser": "4.25.0",
