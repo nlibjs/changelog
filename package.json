@@ -48,7 +48,7 @@
         "@nlib/test": "3.18.7",
         "@types/eslint": "7.2.13",
         "@types/node": "15.14.1",
-        "@typescript-eslint/eslint-plugin": "4.28.1",
+        "@typescript-eslint/eslint-plugin": "4.28.2",
         "@typescript-eslint/parser": "4.28.1",
         "ava": "3.15.0",
         "eslint": "7.30.0",
