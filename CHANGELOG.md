@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.1.11 (2021-09-04)
+
+### Features
+
+- add bin.changelog to call directly ([30afec8](https://github.com/nlibjs/changelog/commit/30afec8bf90151406bedcc7ffd612e3dd5acb289))
+
+### Documentation
+
+- update a badge ([db91dd6](https://github.com/nlibjs/changelog/commit/db91dd6e99e8c440395f07a6a6b1a001d7ee3cc1))
+
+### Continuous Integration
+
+- omit name ([39484eb](https://github.com/nlibjs/changelog/commit/39484eb5fc40ce42155696a4b468fbd04a260f6c))
+
+
 ## v0.1.10 (2021-09-04)
 
 ### Features
