@@ -3,9 +3,11 @@ import {Map} from '@nlib/global';
 import {serializeCommitGroup} from './serializeCommitGroup';
 import type {Commit} from './is/Commit';
 import {thirdCommit, firstCommit} from './sample.test';
+import {RemoteRepository} from './RemoteRepository';
 
 ava('empty tag', (t) => {
-    const generator = serializeCommitGroup({
+    const remote = new RemoteRepository('git@github.com:nlibjs/changelog.git');
+    const generator = serializeCommitGroup(remote, {
         tag: null,
         commits: new Map<string, Array<Commit>>(),
     });
@@ -15,7 +17,8 @@ ava('empty tag', (t) => {
 
 ava('tagged', (t) => {
     const tagged = {...thirdCommit};
-    const generator = serializeCommitGroup({
+    const remote = new RemoteRepository('git@github.com:nlibjs/changelog.git');
+    const generator = serializeCommitGroup(remote, {
         tag: 'foo',
         commit: tagged,
         commits: new Map([
@@ -30,13 +33,13 @@ ava('tagged', (t) => {
         '',
         '### Features',
         '',
-        `- ${firstCommit.message} (${firstCommit.shortHash})`,
-        `- ${thirdCommit.message} (${thirdCommit.shortHash})`,
+        `- ${firstCommit.message} ([${firstCommit.shortHash}](https://github.com/nlibjs/changelog/commit/${firstCommit.hash}))`,
+        `- ${thirdCommit.message} ([${thirdCommit.shortHash}](https://github.com/nlibjs/changelog/commit/${thirdCommit.hash}))`,
         '',
         '### Tests',
         '',
-        `- ${thirdCommit.message} (${thirdCommit.shortHash})`,
-        `- ${firstCommit.message} (${firstCommit.shortHash})`,
+        `- ${thirdCommit.message} ([${thirdCommit.shortHash}](https://github.com/nlibjs/changelog/commit/${thirdCommit.hash}))`,
+        `- ${firstCommit.message} ([${firstCommit.shortHash}](https://github.com/nlibjs/changelog/commit/${firstCommit.hash}))`,
         '',
         '',
     ].join('\n'));

@@ -1,13 +1,14 @@
 import type {Serializable} from '@nlib/global';
 import {serialize} from '@nlib/global';
-import type {Commit} from './is/Commit';
-import type {CommitGroup, TagData, GroupCommitsProps} from './groupCommits';
+import type {CommitGroup, GroupCommitsProps, TagData} from './groupCommits';
 import {groupCommits} from './groupCommits';
+import type {Commit} from './is/Commit';
+import type {RemoteRepository} from './RemoteRepository';
 import {serializeCommitGroup} from './serializeCommitGroup';
 import {walkCommitHistory} from './walkCommitHistory';
 
 export interface GenerateChangelogFromCommitsProps extends GroupCommitsProps {
-    serializer?: (commitGroup: CommitGroup) => Serializable,
+    serializer?: (remote: RemoteRepository, commitGroup: CommitGroup) => Serializable,
     header?: string,
     footer?: string,
     tagPattern?: RegExp,
@@ -15,6 +16,7 @@ export interface GenerateChangelogFromCommitsProps extends GroupCommitsProps {
 }
 
 export const generateChangelogFromCommits = async function* (
+    remote: RemoteRepository,
     commits: AsyncGenerator<Commit> | Iterable<Commit>,
     props: GenerateChangelogFromCommitsProps = {},
 ): AsyncGenerator<string> {
@@ -27,7 +29,7 @@ export const generateChangelogFromCommits = async function* (
         yield header;
     }
     for await (const commitGroup of groupCommits(commits, props)) {
-        yield* serialize(serializer(commitGroup));
+        yield* serialize(serializer(remote, commitGroup));
         yield '\n';
     }
     if (footer) {
@@ -38,8 +40,9 @@ export const generateChangelogFromCommits = async function* (
 export interface GenerateChangelogProps extends GenerateChangelogFromCommitsProps {}
 
 export const generateChangelog = async function* (
+    remote: RemoteRepository,
     headCommit?: string,
     props: GenerateChangelogProps = {},
 ): AsyncGenerator<string> {
-    yield* generateChangelogFromCommits(walkCommitHistory(headCommit), props);
+    yield* generateChangelogFromCommits(remote, walkCommitHistory(headCommit), props);
 };

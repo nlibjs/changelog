@@ -3,6 +3,7 @@ import {serialize, Map} from '@nlib/global';
 import {uISO8601DATE} from '@nlib/date';
 import type {CommitGroup} from './groupCommits';
 import type {Commit} from './is/Commit';
+import type {RemoteRepository} from './RemoteRepository';
 
 export const DefaultTypeAliases = new Map([
     ['breaking', 'break'],
@@ -59,16 +60,18 @@ const getTitle = (
 };
 
 export const serializeCommit = (
+    remote: RemoteRepository,
     commit: Commit,
-): string => `- ${commit.message} (${commit.shortHash})\n`;
+): string => `- ${commit.message} ([${commit.shortHash}](${remote.getCommitUrl(commit.hash)}))\n`;
 
 export const serializeCommitGroup = function* (
+    remote: RemoteRepository,
     group: CommitGroup,
     {
         serializer = serializeCommit,
         types = CommitTypeInformation,
     }: {
-        serializer?: (commits: Commit) => Serializable,
+        serializer?: (remote: RemoteRepository, commits: Commit) => Serializable,
         types?: Array<{prefix: string, title: string}>,
     } = {},
 ): Generator<string> {
@@ -79,7 +82,7 @@ export const serializeCommitGroup = function* (
             if (title) {
                 yield `### ${getTitle(type, types)}\n\n`;
                 for (const commit of commitList) {
-                    yield* serialize(serializer(commit));
+                    yield* serialize(serializer(remote, commit));
                 }
                 yield '\n';
             }

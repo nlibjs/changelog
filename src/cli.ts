@@ -13,6 +13,7 @@ import type {TagData} from './groupCommits';
 import type {Commit} from './is/Commit';
 import {parseTypeAliases} from './parseTypeAliases';
 import {DefaultTypeAliases} from './serializeCommitGroup';
+import {RemoteRepository} from './RemoteRepository';
 
 const parse = createCLIArgumentsParser({
     output: {
@@ -28,6 +29,10 @@ const parse = createCLIArgumentsParser({
         type: 'string[]?',
         alias: 'a',
         description: 'Specify the head commitish',
+    },
+    remote: {
+        type: 'string?',
+        description: 'Specify the short name of remote',
     },
     help: {
         type: 'boolean',
@@ -79,7 +84,8 @@ export const nlibChangelogCLI = async (
                 commit: await getCommit('HEAD'),
             });
         }
-        for await (const fragment of generateChangelog(props.head, options)) {
+        const remote = await RemoteRepository.get(props.remote || 'origin');
+        for await (const fragment of generateChangelog(remote, props.head, options)) {
             output.write(fragment);
         }
         output.end();

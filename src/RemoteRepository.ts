@@ -4,7 +4,7 @@ import {parseRemoteUrl} from './parseRemoteUrl';
 
 export class RemoteRepository {
 
-    public static async get(remoteName = 'origin'): Promise<RemoteRepository> {
+    public static async get(remoteName: string): Promise<RemoteRepository> {
         const {stdout: remoteUrl} = await exec(`git remote get-url ${remoteName}`);
         return new this(remoteUrl);
     }
