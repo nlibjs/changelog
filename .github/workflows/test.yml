@@ -13,7 +13,7 @@ jobs:
         node: [16.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
           cache: npm
@@ -23,7 +23,7 @@ jobs:
     needs: [Setup]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 16.x
           cache: npm
@@ -38,7 +38,9 @@ jobs:
         node: [16.x, 14.x, 12.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
           cache: npm
