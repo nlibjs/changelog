@@ -21,6 +21,7 @@
         "!*.test.*"
     ],
     "bin": {
+        "changelog": "lib/cli.js",
         "nlib-changelog": "lib/cli.js"
     },
     "scripts": {
