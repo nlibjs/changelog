@@ -42,7 +42,7 @@ export const CommitFormat = [
 export const getCommit = async (
     commitish: string,
 ): Promise<Commit> => {
-    const {stdout: rawCommit} = await exec(`git log -1 --format='${CommitFormat}' ${commitish}`);
+    const {stdout: rawCommit} = await exec(`git log -1 --format="${CommitFormat}" ${commitish}`);
     let offset = prefix.length;
     const consume = (): string => {
         const currentOffset = offset;
