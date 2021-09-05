@@ -39,12 +39,12 @@
     "dependencies": {
         "@nlib/date": "0.1.2",
         "@nlib/global": "3.18.0",
-        "@nlib/nodetool": "0.1.17",
+        "@nlib/nodetool": "0.3.0",
         "@nlib/typing": "0.2.0"
     },
     "devDependencies": {
-        "@nlib/eslint-config": "3.17.24",
-        "@nlib/githooks": "0.0.5",
+        "@nlib/eslint-config": "3.17.25",
+        "@nlib/githooks": "0.1.0",
         "@nlib/test": "3.18.7",
         "@types/eslint": "7.28.0",
         "@types/node": "16.7.10",
