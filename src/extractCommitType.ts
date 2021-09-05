@@ -1,5 +1,3 @@
-import {readLine} from '@nlib/global';
-
 export const isValidType = (
     input: string,
 ): input is string => (/^[\w-]+$/).test(input);
@@ -13,7 +11,7 @@ export const extractCommitType = (
     commitMessage: string,
     props: ExtractCommitTypeProps = {},
 ): {type: string, body: string} => {
-    const line = readLine(commitMessage).next().value || '';
+    const [line] = commitMessage.split(/\r|\n/, 1);
     const colonIndex = line.indexOf(':');
     if (0 <= colonIndex) {
         const typePart = line.slice(0, colonIndex);

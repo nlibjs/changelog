@@ -1,9 +1,8 @@
-import type {Serializable} from '@nlib/global';
-import {serialize, Map} from '@nlib/global';
-import {uISO8601DATE} from '@nlib/date';
 import type {CommitGroup} from './groupCommits';
 import type {Commit} from './is/Commit';
 import type {RemoteRepository} from './RemoteRepository';
+import type {Serializable} from './serialize';
+import {serialize} from './serialize';
 
 export const DefaultTypeAliases = new Map([
     ['breaking', 'break'],
@@ -76,7 +75,7 @@ export const serializeCommitGroup = function* (
     } = {},
 ): Generator<string> {
     if (group.tag) {
-        yield `## ${group.tag} (${uISO8601DATE(group.commit.committer.date)})\n\n`;
+        yield `## ${group.tag} (${group.commit.committer.date.toISOString().split('T')[0]}})\n\n`;
         for (const [type, commitList] of [...group.commits].sort(([a], [b]): number => getPriority(a, types) < getPriority(b, types) ? 1 : -1)) {
             const title = getTitle(type, types);
             if (title) {

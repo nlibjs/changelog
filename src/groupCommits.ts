@@ -1,4 +1,3 @@
-import {Map} from '@nlib/global';
 import type {Commit} from './is/Commit';
 import type {ExtractCommitTypeProps} from './extractCommitType';
 import {extractCommitType} from './extractCommitType';

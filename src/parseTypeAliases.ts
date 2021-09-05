@@ -1,4 +1,3 @@
-import {AppError} from '@nlib/global';
 import {isValidType} from './extractCommitType';
 
 export const parseTypeAliases = function* (
@@ -8,11 +7,17 @@ export const parseTypeAliases = function* (
         const parts = alias.split('/');
         const from = parts[0].trim();
         if (!isValidType(from)) {
-            throw new AppError({code: 'InvalidAliasFrom', data: from});
+            throw Object.assign(new Error('InvalidAliasFrom'), {
+                code: 'InvalidAliasFrom',
+                data: from,
+            });
         }
         const to = parts[1].trim();
         if (!isValidType(to)) {
-            throw new AppError({code: 'InvalidAliasTo', data: to});
+            throw Object.assign(new Error('InvalidAliasTo'), {
+                code: 'InvalidAliasTo',
+                data: to,
+            });
         }
         yield [from, to];
     }

@@ -1,5 +1,5 @@
-import type {Serializable} from '@nlib/global';
-import {serialize} from '@nlib/global';
+import type {Serializable} from './serialize';
+import {serialize} from './serialize';
 import type {CommitGroup, GroupCommitsProps, TagData} from './groupCommits';
 import {groupCommits} from './groupCommits';
 import type {Commit} from './is/Commit';

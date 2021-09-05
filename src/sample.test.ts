@@ -1,4 +1,3 @@
-import {Date} from '@nlib/global';
 import {testFunction} from '@nlib/test';
 import type {Commit} from './is/Commit';
 import {isCommit} from './is/Commit';

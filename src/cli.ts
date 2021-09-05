@@ -4,7 +4,6 @@ import * as console from 'console';
 import * as path from 'path';
 import * as fs from 'fs';
 import type * as stream from 'stream';
-import {Date, Map} from '@nlib/global';
 import {createCLIArgumentsParser, getVersion, serializeDefinitionMap} from '@nlib/nodetool';
 import type {GenerateChangelogProps} from './generateChangelog';
 import {generateChangelog} from './generateChangelog';

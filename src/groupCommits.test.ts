@@ -1,6 +1,5 @@
 /* eslint-disable max-lines-per-function */
 import ava from 'ava';
-import {Date, Map} from '@nlib/global';
 import type {Commit} from './is/Commit';
 import {groupCommits} from './groupCommits';
 

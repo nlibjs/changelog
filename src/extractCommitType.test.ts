@@ -1,5 +1,4 @@
 import {testFunction} from '@nlib/test';
-import {Map} from '@nlib/global';
 import {extractCommitType} from './extractCommitType';
 
 testFunction(extractCommitType, {
