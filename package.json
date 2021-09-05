@@ -55,6 +55,28 @@
         "ts-node": "10.2.1",
         "typescript": "4.4.2"
     },
+    "eslintConfig": {
+        "extends": [
+            "@nlib/eslint-config"
+        ],
+        "env": {
+            "node": true
+        },
+        "rules": {
+            "@nlib/no-globals": "off"
+        }
+    },
+    "ava": {
+        "extensions": [
+            "ts"
+        ],
+        "require": [
+            "ts-node/register"
+        ],
+        "files": [
+            "./src/**/*.test.ts"
+        ]
+    },
     "lint-staged": {
         "*.ts": [
             "eslint"
