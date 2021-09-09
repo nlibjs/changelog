@@ -43,7 +43,7 @@
     "devDependencies": {
         "@nlib/eslint-config": "3.17.25",
         "@nlib/githooks": "0.1.0",
-        "@nlib/test": "3.18.7",
+        "@nlib/test": "3.18.8",
         "@types/eslint": "7.28.0",
         "@types/node": "16.7.10",
         "@typescript-eslint/eslint-plugin": "4.30.0",
