@@ -37,7 +37,7 @@
         "version:add": "git add ."
     },
     "dependencies": {
-        "@nlib/nodetool": "0.3.0",
+        "@nlib/nodetool": "0.4.2",
         "@nlib/typing": "0.2.0"
     },
     "devDependencies": {
