@@ -18,7 +18,8 @@
     "type": "module",
     "main": "./lib/indexen.mjs",
     "files": [
-        "lib"
+        "lib",
+        "!**/*.test.*"
     ],
     "bin": {
         "changelog": "./lib/cli.mjs",
