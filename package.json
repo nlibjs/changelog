@@ -36,8 +36,8 @@
         "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
         "test:unit": "ava",
         "lint": "eslint --ext .ts --ext .js src",
-        "version": "run-s version:*",
-        "version:changelog": "ts-node src/cli.ts --output CHANGELOG.md",
+        "version": "run-s build version:*",
+        "version:changelog": "node lib/cli.mjs --output CHANGELOG.md",
         "version:add": "git add ."
     },
     "dependencies": {
