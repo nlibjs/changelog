@@ -13,47 +13,52 @@
     "homepage": "https://github.com/nlibjs/changelog",
     "repository": "https://github.com/nlibjs/changelog",
     "engines": {
-        "node": ">=12"
+        "node": ">=14"
     },
-    "main": "lib/index.js",
+    "type": "module",
+    "main": "./lib/indexen.mjs",
     "files": [
         "lib",
-        "!*.test.*"
+        "!**/*.test.*"
     ],
     "bin": {
-        "changelog": "lib/cli.js",
-        "nlib-changelog": "lib/cli.js"
+        "changelog": "./lib/cli.mjs",
+        "nlib-changelog": "./lib/cli.mjs"
     },
     "scripts": {
         "build": "run-s build:*",
-        "build:index": "indexen --input src --output src/index.ts",
-        "build:tsc": "tsc --project tsconfig.build.json",
+        "build:index": "nlib-indexen --output src/index.ts \"./**/*.ts\"",
+        "build:tsc": "tsc",
+        "build:esmify": "esmify \"lib/**\"",
         "test": "run-s test:*",
-        "test:type": "tsc --noEmit",
-        "test:ava": "ava",
+        "test:build": "run-s test:build:*",
+        "test:build:tsc": "tsc",
+        "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
+        "test:unit": "ava",
         "lint": "eslint --ext .ts --ext .js src",
         "version": "run-s version:*",
         "version:changelog": "ts-node src/cli.ts --output CHANGELOG.md",
         "version:add": "git add ."
     },
     "dependencies": {
-        "@nlib/nodetool": "0.3.0",
-        "@nlib/typing": "0.2.0"
+        "@nlib/typing": "0.3.4",
+        "commander": "9.3.0"
     },
     "devDependencies": {
-        "@nlib/eslint-config": "3.17.25",
+        "@nlib/eslint-config": "3.18.0",
+        "@nlib/esmify": "0.1.2",
         "@nlib/githooks": "0.1.0",
-        "@nlib/test": "3.18.7",
-        "@types/eslint": "7.28.0",
-        "@types/node": "16.7.10",
-        "@typescript-eslint/eslint-plugin": "4.30.0",
-        "@typescript-eslint/parser": "4.30.0",
-        "ava": "3.15.0",
-        "eslint": "7.32.0",
-        "lint-staged": "11.1.2",
+        "@nlib/indexen": "0.2.2",
+        "@types/eslint": "8.4.3",
+        "@types/node": "18.0.0",
+        "@typescript-eslint/eslint-plugin": "5.28.0",
+        "@typescript-eslint/parser": "5.28.0",
+        "ava": "4.3.0",
+        "eslint": "8.18.0",
+        "lint-staged": "13.0.2",
         "npm-run-all": "4.1.5",
-        "ts-node": "10.2.1",
-        "typescript": "4.4.2"
+        "ts-node": "10.8.1",
+        "typescript": "4.7.4"
     },
     "eslintConfig": {
         "extends": [
@@ -67,21 +72,12 @@
         }
     },
     "ava": {
-        "extensions": [
-            "ts"
-        ],
-        "require": [
-            "ts-node/register"
-        ],
         "files": [
-            "./src/**/*.test.ts"
+            "lib/**/*.test.{ts,tsx,js,mjs,cjs,jsx}"
         ]
     },
     "lint-staged": {
-        "*.ts": [
-            "eslint"
-        ],
-        "*.js": [
+        "*.{ts,tsx,js,mjs,cjs,jsx}": [
             "eslint"
         ]
     },

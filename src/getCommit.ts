@@ -1,5 +1,5 @@
 import {ensure} from '@nlib/typing';
-import {exec} from '@nlib/nodetool';
+import {exec} from './exec.private';
 import type {Commit} from './is/Commit';
 import {isCommit} from './is/Commit';
 import {parseRefNames} from './parseRefNames';

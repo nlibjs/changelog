@@ -1,16 +1,26 @@
-import {testFunction} from '@nlib/test';
+import type {Resolved} from '@nlib/typing';
+import ava from 'ava';
 import {getCommit} from './getCommit';
 import {
-    thirdCommit,
+    firstCommit, secondCommit, thirdCommit,
     thirdCommitLike,
-    secondCommit,
-    firstCommit,
 } from './sample.test';
 
-testFunction(getCommit, {input: thirdCommit.hash, like: thirdCommitLike});
+interface Case {
+    input: string,
+    expected: Partial<Resolved<ReturnType<typeof getCommit>>>,
+}
 
-testFunction(getCommit, {input: secondCommit.hash, expected: secondCommit});
-testFunction(getCommit, {input: secondCommit.shortHash, expected: secondCommit});
-testFunction(getCommit, {input: secondCommit.tag[0], expected: secondCommit});
+const cases: Array<Case> = [
+    {input: thirdCommit.hash, expected: thirdCommitLike},
+    {input: secondCommit.hash, expected: secondCommit},
+    {input: secondCommit.shortHash, expected: secondCommit},
+    {input: secondCommit.tag[0], expected: secondCommit},
+    {input: firstCommit.hash, expected: firstCommit},
+];
 
-testFunction(getCommit, {input: firstCommit.hash, expected: firstCommit});
+for (const {input, expected} of cases) {
+    ava(`${input} → ${JSON.stringify(expected)}`, async (t) => {
+        t.like(await getCommit(input), expected);
+    });
+}

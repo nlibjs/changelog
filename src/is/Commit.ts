@@ -19,8 +19,8 @@ export interface Commit {
 export const isCommit = createTypeChecker<Commit>(
     'Commit',
     {
-        tag: [isString],
-        reference: [isString],
+        tag: isString.array,
+        reference: isString.array,
         hash: isString,
         shortHash: isString,
         parentHash: isString,

@@ -75,7 +75,7 @@ export const serializeCommitGroup = function* (
     } = {},
 ): Generator<string> {
     if (group.tag) {
-        yield `## ${group.tag} (${group.commit.committer.date.toISOString().split('T')[0]}})\n\n`;
+        yield `## ${group.tag} (${group.commit.committer.date.toISOString().split('T')[0]})\n\n`;
         for (const [type, commitList] of [...group.commits].sort(([a], [b]): number => getPriority(a, types) < getPriority(b, types) ? 1 : -1)) {
             const title = getTitle(type, types);
             if (title) {

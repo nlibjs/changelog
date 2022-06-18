@@ -1,8 +1,6 @@
 import {isValidType} from './extractCommitType';
 
-export const parseTypeAliases = function* (
-    aliases: Iterable<string>,
-): Generator<[string, string]> {
+export const parseTypeAliases = function* (aliases: Iterable<string>): Generator<[string, string]> {
     for (const alias of aliases) {
         const parts = alias.split('/');
         const from = parts[0].trim();
