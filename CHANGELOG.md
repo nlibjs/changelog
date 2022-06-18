@@ -1,5 +1,31 @@
 # Changelog
 
+## v0.2.0 (2022-06-18)
+
+### Code Refactoring
+
+- use latest indexen and commander ([70ef54b](https://github.com/nlibjs/changelog/commit/70ef54beae23cb7ef8267a3f0db91a5dbec01720))
+
+### Documentation
+
+- change the badge text ([6d1e61b](https://github.com/nlibjs/changelog/commit/6d1e61ba7bea60cee582c5d4b8ec47b127d3ecc0))
+- update a badge ([1030f68](https://github.com/nlibjs/changelog/commit/1030f6855674c37ac4f1c2cabfa35db1d37c55fb))
+
+### Continuous Integration
+
+- delete node 12 and add node 18 ([802e893](https://github.com/nlibjs/changelog/commit/802e89370a578f9750a34dde7a36881660e6d6f3))
+- remove Setup job ([846d9ac](https://github.com/nlibjs/changelog/commit/846d9ac58dc839af5e228c1365ba5b0523eeddef))
+- use cleanup-package-json directly ([abe23c0](https://github.com/nlibjs/changelog/commit/abe23c06ffe6985ed868112379ef0b37d20e72bd))
+
+### Dependency Upgrades
+
+- upgrade @nlib/indexen ([347b17c](https://github.com/nlibjs/changelog/commit/347b17c9a858bd2362ce3459599a65caccd77f4d))
+- @nlib/eslint-config:3.17.25→3.18.0 @nlib/typing:0.2.0→0.3.4 @types/eslint:7.28.0→8.4.3 @types/node:16.7.10→18.0.0 @typescript-eslint/eslint-plugin:4.30.0→5.28.0 @typescript-eslint/parser:4.30.0→5.28.0 ava:3.15.0→4.3.0 eslint:7.32.0→8.18.0 lint-staged:11.1.2→13.0.2 ts-node:10.2.1→10.8.1 typescript:4.4.2→4.7.4 ([c12d210](https://github.com/nlibjs/changelog/commit/c12d21084123c8ff7a2698724f715cba57dda8bb))
+- uninstall @nlib/date and @nlib/global ([332e798](https://github.com/nlibjs/changelog/commit/332e7982bf8f611f23d9eff13b2c9d2968a75b96))
+- @nlib/eslint-config:3.17.24→3.17.25 @nlib/githooks:0.0.5→0.1.0 @nlib/nodetool:0.1.17→0.3.0 ([babe13c](https://github.com/nlibjs/changelog/commit/babe13cfac04ce12c2024d0f89887c9d6df65824))
+- call lint-commit directly ([d8f8143](https://github.com/nlibjs/changelog/commit/d8f81432586cc7055c61350f836d216c4e7ce31f))
+
+
 ## v0.1.11 (2021-09-04)
 
 ### Features
