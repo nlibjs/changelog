@@ -1,4 +1,4 @@
-import {testFunction} from '@nlib/test';
+import ava from 'ava';
 import type {Commit} from './is/Commit';
 import {isCommit} from './is/Commit';
 
@@ -17,7 +17,9 @@ export const firstCommit: Commit = {
     committer: {...user, date: new Date('2020-08-31T03:04:05+09:00')},
     message: 'chore: setup',
 };
-testFunction(isCommit, {input: firstCommit, expected: true});
+ava('first commit', (t) => {
+    t.is(isCommit(firstCommit), true);
+});
 
 export const secondCommit: Commit = {
     tag: ['tag-2', 'tag-1'],
@@ -32,7 +34,9 @@ export const secondCommit: Commit = {
         'this message includes some \'\\special\' characters😉',
     ].join('\n'),
 };
-testFunction(isCommit, {input: secondCommit, expected: true});
+ava('second commit', (t) => {
+    t.is(isCommit(secondCommit), true);
+});
 
 export const thirdCommit: Commit = {
     tag: [],
@@ -44,7 +48,9 @@ export const thirdCommit: Commit = {
     committer: {...user, date: new Date('2020-08-31T03:08:38+09:00')},
     message: 'feat: add isCommit',
 };
-testFunction(isCommit, {input: thirdCommit, expected: true});
+ava('third commit', (t) => {
+    t.is(isCommit(thirdCommit), true);
+});
 
 export const thirdCommitLike: Partial<Commit> = {...thirdCommit};
 delete thirdCommitLike.reference;

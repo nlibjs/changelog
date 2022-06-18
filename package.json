@@ -13,35 +13,41 @@
     "homepage": "https://github.com/nlibjs/changelog",
     "repository": "https://github.com/nlibjs/changelog",
     "engines": {
-        "node": ">=12"
+        "node": ">=14"
     },
-    "main": "lib/index.js",
+    "type": "module",
+    "main": "./lib/indexen.mjs",
     "files": [
-        "lib",
-        "!*.test.*"
+        "lib"
     ],
     "bin": {
-        "changelog": "lib/cli.js",
-        "nlib-changelog": "lib/cli.js"
+        "changelog": "./lib/cli.mjs",
+        "nlib-changelog": "./lib/cli.mjs"
     },
     "scripts": {
         "build": "run-s build:*",
-        "build:index": "indexen --input src --output src/index.ts",
-        "build:tsc": "tsc --project tsconfig.build.json",
+        "build:index": "nlib-indexen --output src/index.ts \"./**/*.ts\"",
+        "build:tsc": "tsc",
+        "build:esmify": "esmify \"lib/**\"",
         "test": "run-s test:*",
-        "test:type": "tsc --noEmit",
-        "test:ava": "ava",
+        "test:build": "run-s test:build:*",
+        "test:build:tsc": "tsc",
+        "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
+        "test:unit": "ava",
         "lint": "eslint --ext .ts --ext .js src",
         "version": "run-s version:*",
         "version:changelog": "ts-node src/cli.ts --output CHANGELOG.md",
         "version:add": "git add ."
     },
     "dependencies": {
-        "@nlib/typing": "0.3.4"
+        "@nlib/typing": "0.3.4",
+        "commander": "9.3.0"
     },
     "devDependencies": {
         "@nlib/eslint-config": "3.18.0",
+        "@nlib/esmify": "0.1.2",
         "@nlib/githooks": "0.1.0",
+        "@nlib/indexen": "0.2.1",
         "@types/eslint": "8.4.3",
         "@types/node": "18.0.0",
         "@typescript-eslint/eslint-plugin": "5.28.0",
@@ -65,21 +71,12 @@
         }
     },
     "ava": {
-        "extensions": [
-            "ts"
-        ],
-        "require": [
-            "ts-node/register"
-        ],
         "files": [
-            "./src/**/*.test.ts"
+            "lib/**/*.test.{ts,tsx,js,mjs,cjs,jsx}"
         ]
     },
     "lint-staged": {
-        "*.ts": [
-            "eslint"
-        ],
-        "*.js": [
+        "*.{ts,tsx,js,mjs,cjs,jsx}": [
             "eslint"
         ]
     },

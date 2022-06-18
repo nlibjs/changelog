@@ -1,4 +1,4 @@
-import {exec} from '@nlib/nodetool';
+import {exec} from './exec.private';
 import type {GitServiceName} from './parseRemoteUrl';
 import {parseRemoteUrl} from './parseRemoteUrl';
 

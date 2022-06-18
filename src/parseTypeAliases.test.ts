@@ -1,20 +1,18 @@
-import {testFunction} from '@nlib/test';
+import ava from 'ava';
 import {parseTypeAliases} from './parseTypeAliases';
 
-const parse = (aliases: Iterable<string>): Array<[string, string]> => [...parseTypeAliases(aliases)];
-
-testFunction(parse, {
-    input: ['a/b', 'c/d'],
-    expected: [
-        ['a', 'b'],
-        ['c', 'd'],
-    ],
-});
-testFunction(parse, {
-    input: ['a a/b', 'c/d'],
-    error: {code: 'InvalidAliasFrom'},
-});
-testFunction(parse, {
-    input: ['a/b', 'c/d d'],
-    error: {code: 'InvalidAliasTo'},
+ava('a/b c/d', (t) => {
+    t.deepEqual(
+        [...parseTypeAliases(['a/b', 'c/d'])],
+        [
+            ['a', 'b'],
+            ['c', 'd'],
+        ],
+    );
+    t.throws(() => {
+        [...parseTypeAliases(['a a/b', 'c/d'])].slice();
+    }, {code: 'InvalidAliasFrom'});
+    t.throws(() => {
+        [...parseTypeAliases(['a/b', 'c/d d'])].slice();
+    }, {code: 'InvalidAliasTo'});
 });
