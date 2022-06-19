@@ -38,7 +38,7 @@ program.name(packageJson.name);
 program.description(packageJson.description);
 program.option('-o, --output <path>', 'A path where the result is written to.');
 program.option('--head <commit-ish>', 'Specify the head commit-ish.');
-program.option('--alias <...aliases>', 'Specify the commit type aliases.');
+program.option('--alias <aliases...>', 'Specify the commit type aliases.');
 program.option('--remote', 'Specify the short name of remote.');
 program.version(packageJson.version);
 program.action(
