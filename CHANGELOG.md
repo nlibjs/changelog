@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.1 (2022-06-19)
+
+### Bug Fixes
+
+- alias option ([b856869](https://github.com/nlibjs/changelog/commit/b8568697ab4a7317a7ca3817b69b15f441d06be8))
+- package.main ([638edbc](https://github.com/nlibjs/changelog/commit/638edbc4cc715c271292e786f2087902fec34d8a))
+
+
 ## v0.2.0 (2022-06-18)
 
 ### Code Refactoring
