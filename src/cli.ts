@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import {Command} from 'commander';
 import * as console from 'console';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as process from 'process';
 import type * as stream from 'stream';
+import {Command} from 'commander';
 import type {GenerateChangelogProps} from './generateChangelog';
 import {generateChangelog} from './generateChangelog';
 import {getCommit} from './getCommit';
