@@ -1,3 +1,4 @@
+import * as console from 'console';
 import type {Commit} from './is/Commit';
 import type {ExtractCommitTypeProps} from './extractCommitType';
 import {extractCommitType} from './extractCommitType';
@@ -45,6 +46,7 @@ export const groupCommits = async function* (
                 }
                 tagData = {tag, commit};
             }
+            console.info(`${tag} ${commit.author.date.toISOString()} ${commit.hash}`);
         }
         const {type, body} = extractCommitType(commit.message, props);
         let list = commits.get(type);

@@ -5,7 +5,6 @@ export * from './extractCommitType';
 export * from './generateChangelog';
 export * from './getCommit';
 export * from './groupCommits';
-export * from './index';
 export * from './parseRefNames';
 export * from './parseRemoteUrl';
 export * from './parseTypeAliases';
