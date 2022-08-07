@@ -1,3 +1,4 @@
+import * as console from 'console';
 import type {Serializable} from './serialize';
 import {serialize} from './serialize';
 import type {CommitGroup, GroupCommitsProps, TagData} from './groupCommits';
@@ -29,6 +30,7 @@ export const generateChangelogFromCommits = async function* (
         yield header;
     }
     for await (const commitGroup of groupCommits(commits, props)) {
+        console.info(`${commitGroup.tag} (${commitGroup.commits.size})`);
         yield* serialize(serializer(remote, commitGroup));
         yield '\n';
     }

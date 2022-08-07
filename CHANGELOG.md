@@ -4,8 +4,22 @@
 
 ### Bug Fixes
 
+- eslint errors ([e03703a](https://github.com/nlibjs/changelog/commit/e03703a5672f096a38699a72acb39e49a0cf2d50))
 - alias option ([b856869](https://github.com/nlibjs/changelog/commit/b8568697ab4a7317a7ca3817b69b15f441d06be8))
 - package.main ([638edbc](https://github.com/nlibjs/changelog/commit/638edbc4cc715c271292e786f2087902fec34d8a))
+
+### Dependency Upgrades
+
+- @nlib/eslint-config:3.18.0→3.18.1 ([0a6e2fa](https://github.com/nlibjs/changelog/commit/0a6e2faf0757bb77e383064313af14e062d33db6))
+- @types/node:18.6.3→18.6.4 ([fce4ee3](https://github.com/nlibjs/changelog/commit/fce4ee338d6a9ec5ce7aceae3a8723df88f9435a))
+- @nlib/esmify:0.1.2→0.3.0 ([3f405de](https://github.com/nlibjs/changelog/commit/3f405def9e64d16015ffaa5401e6401cb28c51ed))
+- ava:4.3.0→4.3.1 ([092248a](https://github.com/nlibjs/changelog/commit/092248a367f4de42b07d83cd1708ac32e2e44c5b))
+- @nlib/indexen:0.2.2→0.2.5 ([731d77d](https://github.com/nlibjs/changelog/commit/731d77dee80192ca177f78b2dd13e4afb854bad5))
+- commander:9.3.0→9.4.0 ([0d4b215](https://github.com/nlibjs/changelog/commit/0d4b2157f84c00da6c7dea9a6518407d57641a30))
+- @nlib/typing:0.3.4→0.4.10 ([2ecaf6e](https://github.com/nlibjs/changelog/commit/2ecaf6ecf9a3438860375351f0195414a6024452))
+- @typescript-eslint/eslint-plugin:5.29.0→5.32.0 @typescript-eslint/parser:5.29.0→5.32.0 ([41a7dd1](https://github.com/nlibjs/changelog/commit/41a7dd133b9490a76da6c60ff8448b4dddab3528))
+- eslint:8.19.0→8.21.0 ([86e511d](https://github.com/nlibjs/changelog/commit/86e511db9c25088e4c476d3766536eda6af9146c))
+- uninstall ts-node ([35697b4](https://github.com/nlibjs/changelog/commit/35697b4a0f35baad137ae449fe1f35bba80a6803))
 
 
 ## v0.2.0 (2022-06-18)

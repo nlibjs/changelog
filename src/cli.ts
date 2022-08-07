@@ -61,6 +61,7 @@ program.action(
                 commit: await getCommit('HEAD'),
             });
         }
+        console.info(options);
         const remote = await RemoteRepository.get(props.remote || 'origin');
         for await (const fragment of generateChangelog(remote, props.head, options)) {
             output.write(fragment);
