@@ -60,7 +60,7 @@ program.action(
         };
         if (!props.head) {
             const projectPackageJson = loadPackageJson(
-                new URL('package.json', pathToFileURL(process.cwd())),
+                new URL('package.json', pathToFileURL(`${process.cwd()}${path.sep}`)),
             );
             options.initialTag = getPseudoTagData({
                 tag: `v${projectPackageJson.version}`,
