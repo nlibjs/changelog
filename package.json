@@ -36,7 +36,7 @@
         "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
         "test:unit": "ava",
         "lint": "eslint --ext .ts --ext .js src",
-        "postversion": "run-s postversion:*",
+        "postversion": "run-s build postversion:*",
         "postversion:changelog": "node lib/cli.mjs --output CHANGELOG.md",
         "postversion:add": "git add .",
         "postversion:amend": "git commit -m \"$(git log -1 --format=%s)\" --amend"
