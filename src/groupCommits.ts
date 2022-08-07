@@ -1,3 +1,4 @@
+import * as console from 'console';
 import type {Commit} from './is/Commit';
 import type {ExtractCommitTypeProps} from './extractCommitType';
 import {extractCommitType} from './extractCommitType';
@@ -36,6 +37,7 @@ export const groupCommits = async function* (
     for await (const commit of commitIterator) {
         const tag = commit.tag.find((t) => tagPattern.test(t));
         if (tag) {
+            console.info(`${tag} ${commit.author.date.toISOString()} ${commit.hash}`);
             if (tagData && tagData.tag === tag) {
                 tagData.commit = commit;
             } else {
