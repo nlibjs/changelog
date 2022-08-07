@@ -34,7 +34,7 @@
         "test:build": "run-s test:build:*",
         "test:build:tsc": "tsc",
         "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
-        "test:unit": "ava",
+        "test:unit": "ava --timeout=10s",
         "lint": "eslint --ext .ts --ext .js src",
         "postversion": "run-s build postversion:*",
         "postversion:changelog": "node lib/cli.mjs --output CHANGELOG.md",
