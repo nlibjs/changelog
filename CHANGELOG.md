@@ -1,12 +1,14 @@
 # Changelog
 
-## v0.2.1 (2022-06-19)
+## v0.2.2 (2022-08-07)
 
 ### Bug Fixes
 
 - eslint errors ([e03703a](https://github.com/nlibjs/changelog/commit/e03703a5672f096a38699a72acb39e49a0cf2d50))
-- alias option ([b856869](https://github.com/nlibjs/changelog/commit/b8568697ab4a7317a7ca3817b69b15f441d06be8))
-- package.main ([638edbc](https://github.com/nlibjs/changelog/commit/638edbc4cc715c271292e786f2087902fec34d8a))
+
+### Build System
+
+- build before postversion ([7aa0691](https://github.com/nlibjs/changelog/commit/7aa069186457a680793e222588432140d19d1da1))
 
 ### Dependency Upgrades
 
@@ -20,6 +22,14 @@
 - @typescript-eslint/eslint-plugin:5.29.0→5.32.0 @typescript-eslint/parser:5.29.0→5.32.0 ([41a7dd1](https://github.com/nlibjs/changelog/commit/41a7dd133b9490a76da6c60ff8448b4dddab3528))
 - eslint:8.19.0→8.21.0 ([86e511d](https://github.com/nlibjs/changelog/commit/86e511db9c25088e4c476d3766536eda6af9146c))
 - uninstall ts-node ([35697b4](https://github.com/nlibjs/changelog/commit/35697b4a0f35baad137ae449fe1f35bba80a6803))
+
+
+## v0.2.1 (2022-06-19)
+
+### Bug Fixes
+
+- alias option ([b856869](https://github.com/nlibjs/changelog/commit/b8568697ab4a7317a7ca3817b69b15f441d06be8))
+- package.main ([638edbc](https://github.com/nlibjs/changelog/commit/638edbc4cc715c271292e786f2087902fec34d8a))
 
 
 ## v0.2.0 (2022-06-18)
