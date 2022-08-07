@@ -1,14 +1,36 @@
 # Changelog
 
+## v0.2.3 (2022-08-07)
+
+### Bug Fixes
+
+- baseUrl ([7396331](https://github.com/nlibjs/changelog/commit/73963311283b619acc01a4ee72b1158c57fa3761))
+- use project's package.json ([97c7e1b](https://github.com/nlibjs/changelog/commit/97c7e1b3d5dd432a9a7f5dc78cfa82a257002aa3))
+- postversion not works ([425a7ae](https://github.com/nlibjs/changelog/commit/425a7ae9fbc20bd8a016f6160d0183367ba100ec))
+
+### Tests
+
+- +5s ([7151bea](https://github.com/nlibjs/changelog/commit/7151beaadbe3f105530fa73933f1584aca6671e1))
+
+
 ## v0.2.2 (2022-08-07)
 
 ### Bug Fixes
 
 - eslint errors ([e03703a](https://github.com/nlibjs/changelog/commit/e03703a5672f096a38699a72acb39e49a0cf2d50))
 
+### Tests
+
+- add timeout ([1391c3c](https://github.com/nlibjs/changelog/commit/1391c3c486ac0c7ded9178558c5d646e56ec9409))
+
 ### Build System
 
 - build before postversion ([7aa0691](https://github.com/nlibjs/changelog/commit/7aa069186457a680793e222588432140d19d1da1))
+
+### Continuous Integration
+
+- drop 14.x ([b050154](https://github.com/nlibjs/changelog/commit/b0501540834d6da9c5ea19d7228d924dc01a79b7))
+- drop concurrency ([a45e394](https://github.com/nlibjs/changelog/commit/a45e3946c7721c2c8789749a98ceee292879a9af))
 
 ### Dependency Upgrades
 
