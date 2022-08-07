@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as process from 'process';
 import type * as stream from 'stream';
+import {pathToFileURL} from 'url';
 import {Command} from 'commander';
 import type {GenerateChangelogProps} from './generateChangelog';
 import {generateChangelog} from './generateChangelog';
@@ -28,11 +29,13 @@ const getPseudoTagData = (
         committer: {...commit.committer, date},
     },
 });
+const loadPackageJson = (url: URL) => {
+    const jsonString = fs.readFileSync(url, 'utf-8');
+    const {name, version, description} = JSON.parse(jsonString) as Record<string, string>;
+    return {name, version, description};
+};
 
-const packageJson = JSON.parse(
-    fs.readFileSync(new URL('../package.json', import.meta.url), 'utf-8'),
-) as unknown as {name: string, version: string, description: string};
-
+const packageJson = loadPackageJson(new URL('../package.json', import.meta.url));
 const program = new Command();
 program.name(packageJson.name);
 program.description(packageJson.description);
@@ -56,8 +59,11 @@ program.action(
             aliases: 0 < aliases.length ? new Map(parseTypeAliases(aliases)) : DefaultTypeAliases,
         };
         if (!props.head) {
+            const projectPackageJson = loadPackageJson(
+                new URL('package.json', pathToFileURL(`${process.cwd()}${path.sep}`)),
+            );
             options.initialTag = getPseudoTagData({
-                tag: `v${packageJson.version}`,
+                tag: `v${projectPackageJson.version}`,
                 commit: await getCommit('HEAD'),
             });
         }
