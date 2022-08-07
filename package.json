@@ -36,9 +36,10 @@
         "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
         "test:unit": "ava",
         "lint": "eslint --ext .ts --ext .js src",
-        "version": "run-s build version:*",
-        "version:changelog": "node lib/cli.mjs --output CHANGELOG.md",
-        "version:add": "git add ."
+        "postversion": "run-s postversion:*",
+        "postversion:changelog": "node lib/cli.mjs --output CHANGELOG.md",
+        "postversion:add": "git add .",
+        "postversion:amend": "git commit -m \"$(git log -1 --format=%s)\" --amend"
     },
     "dependencies": {
         "@nlib/typing": "0.4.10",
