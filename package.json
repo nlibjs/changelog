@@ -46,7 +46,7 @@
     },
     "devDependencies": {
         "@nlib/eslint-config": "3.18.0",
-        "@nlib/esmify": "0.1.2",
+        "@nlib/esmify": "0.3.0",
         "@nlib/githooks": "0.1.0",
         "@nlib/indexen": "0.2.5",
         "@types/eslint": "8.4.5",
