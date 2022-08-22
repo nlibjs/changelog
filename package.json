@@ -41,7 +41,7 @@
         "version:add": "git add ."
     },
     "dependencies": {
-        "@nlib/typing": "0.4.11",
+        "@nlib/typing": "0.5.7",
         "commander": "9.4.0"
     },
     "devDependencies": {
