@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.2.4 (2023-01-09)
+
+### Bug Fixes
+
+- author.url ([e8651ae](https://github.com/nlibjs/changelog/commit/e8651ae5a0745a880eb1c1d7ffcbd72751978e0c))
+- FUNDING.yml ([6847b07](https://github.com/nlibjs/changelog/commit/6847b0764003953567515cad199c0811a4c008c3))
+
+### Dependency Upgrades
+
+- upgrade dependencies ([b4564d0](https://github.com/nlibjs/changelog/commit/b4564d00e0c70c230ac381019c5fee58eb3a5481))
+- ava:4.3.3→5.1.0 ([84219dc](https://github.com/nlibjs/changelog/commit/84219dc8485672de3f978d4e5affbfa3436de844))
+- @nlib/eslint-config:3.19.5→3.19.6 ([51b8c3b](https://github.com/nlibjs/changelog/commit/51b8c3bbc8940afd99c920d5fda49413bb0e16ef))
+- commander:9.4.1→9.5.0 ([cb7c23a](https://github.com/nlibjs/changelog/commit/cb7c23a62ed8aebb00964f7f172e809966063e38))
+
+
 ## v0.2.3 (2022-08-07)
 
 ### Bug Fixes
