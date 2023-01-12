@@ -48,7 +48,7 @@
         "@nlib/eslint-config": "3.19.6",
         "@nlib/esmify": "0.3.3",
         "@nlib/githooks": "0.1.0",
-        "@nlib/indexen": "0.2.5",
+        "@nlib/indexen": "0.2.6",
         "@types/eslint": "8.4.10",
         "@types/node": "18.11.18",
         "ava": "5.1.0",
