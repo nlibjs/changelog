@@ -50,7 +50,7 @@
         "@nlib/githooks": "0.1.0",
         "@nlib/indexen": "0.2.6",
         "@types/eslint": "8.4.10",
-        "@types/node": "18.14.3",
+        "@types/node": "18.14.4",
         "ava": "5.2.0",
         "eslint": "8.31.0",
         "lint-staged": "13.1.1",
