@@ -1,5 +1,6 @@
 {
     "name": "@nlib/changelog",
+    "description": "A command to generate CHANGELOG.md from commit history",
     "publishConfig": {
         "access": "public"
     },
@@ -35,21 +36,23 @@
         "test:build:tsc": "tsc",
         "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
         "test:unit": "ava --timeout=30s",
-        "lint": "eslint --ext .ts --ext .js src",
-        "version": "run-s build version:*",
-        "version:changelog": "node lib/cli.mjs --output CHANGELOG.md",
-        "version:add": "git add ."
+        "lint": "eslint --ext .mts --ext .ts src",
+        "postversion": "run-s postversion:*",
+        "postversion:changelog": "nlib-changelog --output CHANGELOG.md",
+        "postversion:add": "git add .",
+        "postversion:commit": "git commit --amend --no-edit"
     },
     "dependencies": {
         "@nlib/typing": "1.0.0",
         "commander": "11.0.0"
     },
     "devDependencies": {
-        "@nlib/eslint-config": "3.19.7",
-        "@nlib/esmify": "0.3.3",
+        "@nlib/eslint-config": "3.19.8",
         "@nlib/githooks": "0.1.0",
         "@nlib/indexen": "0.2.7",
         "@types/node": "20.5.0",
+        "@typescript-eslint/eslint-plugin": "6.4.0",
+        "@typescript-eslint/parser": "6.4.0",
         "ava": "5.3.1",
         "eslint": "8.47.0",
         "lint-staged": "14.0.0",
@@ -62,9 +65,6 @@
         ],
         "env": {
             "node": true
-        },
-        "rules": {
-            "@nlib/no-globals": "off"
         },
         "ignorePatterns": [
             "src/index.ts"
