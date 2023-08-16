@@ -69,7 +69,7 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
-    "*.mts": "eslint"
+    "**/*.*(m|c)+(j|t)s*(x)": "eslint"
   },
   "renovate": {
     "extends": [
