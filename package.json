@@ -34,28 +34,27 @@
         "test:build": "run-s test:build:*",
         "test:build:tsc": "tsc",
         "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
-        "test:unit": "ava --timeout=15s",
+        "test:unit": "ava --timeout=30s",
         "lint": "eslint --ext .ts --ext .js src",
         "version": "run-s build version:*",
         "version:changelog": "node lib/cli.mjs --output CHANGELOG.md",
         "version:add": "git add ."
     },
     "dependencies": {
-        "@nlib/typing": "0.5.7",
-        "commander": "9.5.0"
+        "@nlib/typing": "1.0.0",
+        "commander": "11.0.0"
     },
     "devDependencies": {
-        "@nlib/eslint-config": "3.19.6",
+        "@nlib/eslint-config": "3.19.7",
         "@nlib/esmify": "0.3.3",
         "@nlib/githooks": "0.1.0",
-        "@nlib/indexen": "0.2.6",
-        "@types/eslint": "8.4.10",
-        "@types/node": "18.16.15",
-        "ava": "5.3.0",
-        "eslint": "8.31.0",
-        "lint-staged": "13.1.1",
+        "@nlib/indexen": "0.2.7",
+        "@types/node": "20.5.0",
+        "ava": "5.3.1",
+        "eslint": "8.47.0",
+        "lint-staged": "14.0.0",
         "npm-run-all": "4.1.5",
-        "typescript": "4.9.5"
+        "typescript": "5.1.6"
     },
     "eslintConfig": {
         "extends": [
