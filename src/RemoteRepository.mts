@@ -1,6 +1,6 @@
-import { exec } from './exec.private';
-import type { GitServiceName } from './parseRemoteUrl';
-import { parseRemoteUrl } from './parseRemoteUrl';
+import { exec } from './exec.mjs';
+import type { GitServiceName } from './parseRemoteUrl.mjs';
+import { parseRemoteUrl } from './parseRemoteUrl.mjs';
 
 export class RemoteRepository {
   public static async get(remoteName: string): Promise<RemoteRepository> {

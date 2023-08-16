@@ -1,5 +1,5 @@
-import { getCommit } from './getCommit';
-import type { Commit } from './is/Commit';
+import { getCommit } from './getCommit.mjs';
+import type { Commit } from './is/Commit.mjs';
 
 export const walkCommitHistory = async function* (
   startCommitish = 'HEAD',

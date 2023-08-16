@@ -27,16 +27,10 @@
     "nlib-changelog": "./lib/cli.mjs"
   },
   "scripts": {
-    "build": "run-s build:*",
-    "build:index": "nlib-indexen --output src/index.ts \"./**/*.ts\"",
-    "build:tsc": "tsc",
-    "build:esmify": "esmify \"lib/**\"",
-    "test": "run-s test:*",
-    "test:build": "run-s test:build:*",
-    "test:build:tsc": "tsc",
-    "test:build:esmify": "esmify --keepSourceMap \"lib/**\"",
+    "build": "tsc",
+    "test": "run-s build test:*",
     "test:unit": "ava --timeout=30s",
-    "lint": "eslint --ext .mts --ext .ts src",
+    "lint": "eslint --ext .mts src",
     "postversion": "run-s postversion:*",
     "postversion:changelog": "nlib-changelog --output CHANGELOG.md",
     "postversion:add": "git add .",
@@ -66,21 +60,16 @@
     ],
     "env": {
       "node": true
-    },
-    "ignorePatterns": [
-      "src/index.ts"
-    ]
+    }
   },
   "ava": {
     "files": [
-      "lib/**/*.test.{ts,tsx,js,mjs,cjs,jsx}"
+      "lib/**/*.test.mjs"
     ]
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
-    "*.{ts,tsx,js,mjs,cjs,jsx}": [
-      "eslint"
-    ]
+    "*.mts": "eslint"
   },
   "renovate": {
     "extends": [

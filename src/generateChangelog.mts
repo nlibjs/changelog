@@ -1,12 +1,16 @@
 import * as console from 'console';
-import type { Serializable } from './serialize';
-import { serialize } from './serialize';
-import type { CommitGroup, GroupCommitsProps, TagData } from './groupCommits';
-import { groupCommits } from './groupCommits';
-import type { Commit } from './is/Commit';
-import type { RemoteRepository } from './RemoteRepository';
-import { serializeCommitGroup } from './serializeCommitGroup';
-import { walkCommitHistory } from './walkCommitHistory';
+import type { Serializable } from './serialize.mjs';
+import { serialize } from './serialize.mjs';
+import type {
+  CommitGroup,
+  GroupCommitsProps,
+  TagData,
+} from './groupCommits.mjs';
+import { groupCommits } from './groupCommits.mjs';
+import type { Commit } from './is/Commit.mjs';
+import type { RemoteRepository } from './RemoteRepository.mjs';
+import { serializeCommitGroup } from './serializeCommitGroup.mjs';
+import { walkCommitHistory } from './walkCommitHistory.mjs';
 
 export interface GenerateChangelogFromCommitsProps extends GroupCommitsProps {
   serializer?: (

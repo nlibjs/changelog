@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import ava from 'ava';
-import { RemoteRepository } from './RemoteRepository';
+import { RemoteRepository } from './RemoteRepository.mjs';
 
 const commit = 'cb797698b66027378ee2d23c5f0c20293802b1aa';
 

@@ -1,5 +1,5 @@
 import ava from 'ava';
-import { extractCommitType } from './extractCommitType';
+import { extractCommitType } from './extractCommitType.mjs';
 
 interface Case {
   input: Parameters<typeof extractCommitType>;

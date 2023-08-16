@@ -1,5 +1,5 @@
 import ava from 'ava';
-import { parseTypeAliases } from './parseTypeAliases';
+import { parseTypeAliases } from './parseTypeAliases.mjs';
 
 ava('a/b c/d', (t) => {
   t.deepEqual(

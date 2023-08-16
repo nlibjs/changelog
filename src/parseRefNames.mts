@@ -1,4 +1,4 @@
-import { parseUnquotedCSVLine } from './parseUnquotedCSVLine';
+import { parseUnquotedCSVLine } from './parseUnquotedCSVLine.mjs';
 
 export interface RefNames {
   tag: Array<string>;

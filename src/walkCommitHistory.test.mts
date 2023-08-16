@@ -1,11 +1,11 @@
 import ava from 'ava';
-import { walkCommitHistory } from './walkCommitHistory';
+import { walkCommitHistory } from './walkCommitHistory.mjs';
 import {
   thirdCommit,
   thirdCommitLike,
   secondCommit,
   firstCommit,
-} from './sample.test';
+} from './sample.test.mjs';
 
 ava('walk commit history', async (t) => {
   const asyncIterator = walkCommitHistory(thirdCommit.hash);

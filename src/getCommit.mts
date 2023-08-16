@@ -1,8 +1,8 @@
 import { ensure } from '@nlib/typing';
-import { exec } from './exec.private';
-import type { Commit } from './is/Commit';
-import { isCommit } from './is/Commit';
-import { parseRefNames } from './parseRefNames';
+import { exec } from './exec.mjs';
+import type { Commit } from './is/Commit.mjs';
+import { isCommit } from './is/Commit.mjs';
+import { parseRefNames } from './parseRefNames.mjs';
 
 /**
  * https://git-scm.com/docs/pretty-formats

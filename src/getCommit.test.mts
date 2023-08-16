@@ -1,12 +1,12 @@
 import type { Resolved } from '@nlib/typing';
 import ava from 'ava';
-import { getCommit } from './getCommit';
+import { getCommit } from './getCommit.mjs';
 import {
   firstCommit,
   secondCommit,
   thirdCommit,
   thirdCommitLike,
-} from './sample.test';
+} from './sample.test.mjs';
 
 interface Case {
   input: string;

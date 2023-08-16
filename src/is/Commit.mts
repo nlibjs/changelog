@@ -1,8 +1,8 @@
 import { createTypeChecker, isString } from '@nlib/typing';
-import type { CommitAuthor } from './CommitAuthor';
-import { isCommitAuthor } from './CommitAuthor';
-import type { CommitCommitter } from './CommitCommitter';
-import { isCommitCommitter } from './CommitCommitter';
+import type { CommitAuthor } from './CommitAuthor.mjs';
+import { isCommitAuthor } from './CommitAuthor.mjs';
+import type { CommitCommitter } from './CommitCommitter.mjs';
+import { isCommitCommitter } from './CommitCommitter.mjs';
 
 export interface Commit {
   tag: Array<string>;

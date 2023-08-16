@@ -1,7 +1,7 @@
 import * as console from 'console';
-import type { Commit } from './is/Commit';
-import type { ExtractCommitTypeProps } from './extractCommitType';
-import { extractCommitType } from './extractCommitType';
+import type { Commit } from './is/Commit.mjs';
+import type { ExtractCommitTypeProps } from './extractCommitType.mjs';
+import { extractCommitType } from './extractCommitType.mjs';
 
 export interface UntaggedCommitGroup {
   tag: null;

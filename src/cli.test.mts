@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'url';
 import ava from 'ava';
-import { exec } from './exec.private';
+import { exec } from './exec.mjs';
 
 const scriptPath = fileURLToPath(new URL('./cli.mjs', import.meta.url));
 

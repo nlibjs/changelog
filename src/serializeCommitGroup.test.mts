@@ -1,8 +1,8 @@
 import ava from 'ava';
-import { serializeCommitGroup } from './serializeCommitGroup';
-import type { Commit } from './is/Commit';
-import { thirdCommit, firstCommit } from './sample.test';
-import { RemoteRepository } from './RemoteRepository';
+import { serializeCommitGroup } from './serializeCommitGroup.mjs';
+import type { Commit } from './is/Commit.mjs';
+import { thirdCommit, firstCommit } from './sample.test.mjs';
+import { RemoteRepository } from './RemoteRepository.mjs';
 
 ava('empty tag', (t) => {
   const remote = new RemoteRepository('git@github.com:nlibjs/changelog.git');

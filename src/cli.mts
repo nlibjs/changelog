@@ -6,11 +6,11 @@ import * as process from 'node:process';
 import type * as stream from 'node:stream';
 import { Command } from 'commander';
 import { ensure, isString } from '@nlib/typing';
-import type { GenerateChangelogProps } from './generateChangelog';
-import { generateChangelog } from './generateChangelog';
-import { parseTypeAliases } from './parseTypeAliases';
-import { RemoteRepository } from './RemoteRepository';
-import { DefaultTypeAliases } from './serializeCommitGroup';
+import type { GenerateChangelogProps } from './generateChangelog.mjs';
+import { generateChangelog } from './generateChangelog.mjs';
+import { parseTypeAliases } from './parseTypeAliases.mjs';
+import { RemoteRepository } from './RemoteRepository.mjs';
+import { DefaultTypeAliases } from './serializeCommitGroup.mjs';
 
 const { name, description, version } = ensure(
   JSON.parse(

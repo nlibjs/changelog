@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import ava from 'ava';
-import type { Commit } from './is/Commit';
-import { groupCommits } from './groupCommits';
+import type { Commit } from './is/Commit.mjs';
+import { groupCommits } from './groupCommits.mjs';
 
 const user = {
   date: new Date('2020-09-01T15:00:00Z'),

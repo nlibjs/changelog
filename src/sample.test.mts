@@ -1,6 +1,6 @@
 import ava from 'ava';
-import type { Commit } from './is/Commit';
-import { isCommit } from './is/Commit';
+import type { Commit } from './is/Commit.mjs';
+import { isCommit } from './is/Commit.mjs';
 
 export const user = {
   name: 'Kei Ito',

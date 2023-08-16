@@ -1,8 +1,8 @@
-import type { CommitGroup } from './groupCommits';
-import type { Commit } from './is/Commit';
-import type { RemoteRepository } from './RemoteRepository';
-import type { Serializable } from './serialize';
-import { serialize } from './serialize';
+import type { CommitGroup } from './groupCommits.mjs';
+import type { Commit } from './is/Commit.mjs';
+import type { RemoteRepository } from './RemoteRepository.mjs';
+import type { Serializable } from './serialize.mjs';
+import { serialize } from './serialize.mjs';
 
 export const DefaultTypeAliases = new Map([
   ['breaking', 'break'],

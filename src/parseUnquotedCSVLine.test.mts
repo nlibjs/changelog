@@ -1,5 +1,5 @@
 import ava from 'ava';
-import { parseUnquotedCSVLine } from './parseUnquotedCSVLine';
+import { parseUnquotedCSVLine } from './parseUnquotedCSVLine.mjs';
 
 ava('parse a CSV line', (t) => {
   const iterator = parseUnquotedCSVLine(' , foo  ,bar,,');

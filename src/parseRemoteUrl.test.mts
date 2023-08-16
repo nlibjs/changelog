@@ -1,5 +1,5 @@
 import ava from 'ava';
-import { parseRemoteUrl } from './parseRemoteUrl';
+import { parseRemoteUrl } from './parseRemoteUrl.mjs';
 
 interface Case {
   input: string;

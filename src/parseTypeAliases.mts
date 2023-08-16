@@ -1,4 +1,4 @@
-import { isValidType } from './extractCommitType';
+import { isValidType } from './extractCommitType.mjs';
 
 export const parseTypeAliases = function* (
   aliases: Iterable<string>,
