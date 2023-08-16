@@ -42,7 +42,7 @@
     },
     "dependencies": {
         "@nlib/typing": "1.0.0",
-        "commander": "9.5.0"
+        "commander": "11.0.0"
     },
     "devDependencies": {
         "@nlib/eslint-config": "3.19.7",
