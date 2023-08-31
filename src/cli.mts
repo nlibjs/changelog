@@ -11,6 +11,8 @@ import { generateChangelog } from './generateChangelog.mjs';
 import { parseTypeAliases } from './parseTypeAliases.mjs';
 import { RemoteRepository } from './RemoteRepository.mjs';
 import { DefaultTypeAliases } from './serializeCommitGroup.mjs';
+import { getNodePackageVersion } from './getNodePackageVersion.mjs';
+import { getCommit } from './getCommit.mjs';
 
 const { name, description, version } = ensure(
   JSON.parse(
@@ -47,6 +49,21 @@ program.action(
           ? new Map(parseTypeAliases(aliases))
           : DefaultTypeAliases,
     };
+    if (!props.head) {
+      const nodePackageVersion = await getNodePackageVersion();
+      if (nodePackageVersion) {
+        const commit = await getCommit('HEAD');
+        const date = new Date();
+        options.initialTag = {
+          tag: `v${nodePackageVersion}`,
+          commit: {
+            ...commit,
+            author: { ...commit.author, date },
+            committer: { ...commit.committer, date },
+          },
+        };
+      }
+    }
     console.info(options);
     const remote = await RemoteRepository.get(props.remote || 'origin');
     for await (const fragment of generateChangelog(
