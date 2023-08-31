@@ -13,15 +13,12 @@ npm install --save-dev @nlib/changelog
 
 ## Usage
 
-Add the postversion scripts to your package.json.
+Add the [npm-version](https://docs.npmjs.com/cli/commands/npm-version) scripts to your package.json.
 
 ```json
 {
   "scripts": {
-    "postversion": "run-s postversion:*",
-    "postversion:changelog": "nlib-changelog --output CHANGELOG.md",
-    "postversion:add": "git add .",
-    "postversion:commit": "git commit --amend --no-edit"
+    "version": "nlib-changelog --output CHANGELOG.md && git add CHANGELOG.md"
   }
 }
 ```
