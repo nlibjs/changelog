@@ -1,6 +1,15 @@
 # Changelog
 
-## v0.3.0 (2023-08-16)
+## v0.3.1 (2023-08-31)
+
+### Features
+
+- set the latest version tag from package.json if it exists ([4452392](https://github.com/nlibjs/changelog/commit/4452392f992a3894ae8ff992df0dc95cf1122215))
+
+### Bug Fixes
+
+- npm-version script ([114b979](https://github.com/nlibjs/changelog/commit/114b97933d378a542a041296980c933c65d9cc67))
+- amending a tagged commit pushes the tag aside in the history ([9c0401b](https://github.com/nlibjs/changelog/commit/9c0401b8bc90bf1583627360a291cc69409d69fb))
 
 ### Tests
 
@@ -8,6 +17,7 @@
 
 ### Styles
 
+- add quoteProps ([4b2ae52](https://github.com/nlibjs/changelog/commit/4b2ae52b18bcad714014d274ae3146c94bc68262))
 - .ts → .mts ([0dfa943](https://github.com/nlibjs/changelog/commit/0dfa94317218d98359e3dd15689543ba70354224))
 - install prettier ([f1e311e](https://github.com/nlibjs/changelog/commit/f1e311e420c61b520acc01f8c8152bb39bb96296))
 
