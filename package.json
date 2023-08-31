@@ -31,10 +31,7 @@
     "test": "run-s build test:*",
     "test:unit": "ava --timeout=30s",
     "lint": "eslint --ext .mts src",
-    "postversion": "run-s build postversion:*",
-    "postversion:changelog": "node ./lib/cli.mjs --output CHANGELOG.md",
-    "postversion:add": "git add .",
-    "postversion:commit": "git commit --amend --no-edit"
+    "version": "node ./lib/cli.mjs --output CHANGELOG.md && git add CHANGELOG.md"
   },
   "dependencies": {
     "@nlib/typing": "1.0.0",
