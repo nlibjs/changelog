@@ -40,7 +40,7 @@
   "devDependencies": {
     "@nlib/eslint-config": "3.20.1",
     "@nlib/githooks": "0.2.0",
-    "@nlib/indexen": "0.2.8",
+    "@nlib/indexen": "0.2.9",
     "@types/node": "20.5.7",
     "@typescript-eslint/eslint-plugin": "6.5.0",
     "@typescript-eslint/parser": "6.5.0",
