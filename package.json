@@ -34,7 +34,7 @@
     "version": "node ./lib/cli.mjs --output CHANGELOG.md && git add CHANGELOG.md"
   },
   "dependencies": {
-    "@nlib/typing": "1.0.0",
+    "@nlib/typing": "1.1.0",
     "commander": "11.0.0"
   },
   "devDependencies": {
