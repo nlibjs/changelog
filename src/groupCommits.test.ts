@@ -82,9 +82,7 @@ test("group commits", async () => {
 			]),
 		},
 	});
-	assert.deepEqual(await iterator.next(), {
-		done: true,
-	});
+	assert.deepEqual(await iterator.next(), { done: true, value: undefined });
 });
 
 test("initialTag", async () => {
@@ -119,7 +117,7 @@ test("initialTag", async () => {
 			]),
 		},
 	});
-	assert.deepEqual(await iterator1.next(), { done: true });
+	assert.deepEqual(await iterator1.next(), { done: true, value: undefined });
 	const iterator2 = groupCommits(commits, {
 		initialTag: { commit: baseCommit, tag: "v1.0.0" },
 	});
@@ -141,5 +139,5 @@ test("initialTag", async () => {
 			]),
 		},
 	});
-	assert.deepEqual(await iterator2.next(), { done: true });
+	assert.deepEqual(await iterator2.next(), { done: true, value: undefined });
 });

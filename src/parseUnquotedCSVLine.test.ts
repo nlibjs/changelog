@@ -8,5 +8,5 @@ test("parse a CSV line", () => {
 	assert.deepEqual(iterator.next(), { done: false, value: "foo" });
 	assert.deepEqual(iterator.next(), { done: false, value: "bar" });
 	assert.deepEqual(iterator.next(), { done: false, value: "" });
-	assert.deepEqual(iterator.next(), { done: true });
+	assert.deepEqual(iterator.next(), { done: true, value: undefined });
 });

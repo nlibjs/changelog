@@ -15,7 +15,7 @@ interface Case {
 }
 
 const cases: Array<Case> = [
-	{ input: thirdCommit.hash, expected: thirdCommitLike },
+	{ input: thirdCommit.hash, expected: { reference: [], ...thirdCommitLike } },
 	{ input: secondCommit.hash, expected: secondCommit },
 	{ input: secondCommit.shortHash, expected: secondCommit },
 	{ input: secondCommit.tag[0], expected: secondCommit },

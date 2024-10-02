@@ -11,7 +11,7 @@ import {
 test("walk commit history", async () => {
 	const asyncIterator = walkCommitHistory(thirdCommit.hash);
 	const third = await asyncIterator.next();
-	assert.deepEqual(third.value, thirdCommitLike);
+	assert.deepEqual(third.value, { reference: [], ...thirdCommitLike });
 	const second = await asyncIterator.next();
 	assert.deepEqual(second.value, secondCommit);
 	const first = await asyncIterator.next();

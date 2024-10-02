@@ -3,7 +3,7 @@ import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { exec } from "./exec.js";
 
-const scriptPath = fileURLToPath(new URL("./cli.mjs", import.meta.url));
+const scriptPath = fileURLToPath(new URL("./cli.js", import.meta.url));
 
 test("Generate a changelog", async () => {
 	const { stdout } = await exec(`node ${scriptPath}`);
