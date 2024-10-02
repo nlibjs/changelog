@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -10,7 +9,7 @@ export const getNodePackageVersion = async (): Promise<string | null> => {
 		pathToFileURL(`${process.cwd()}${path.sep}`),
 	);
 	const stats = await fs.stat(jsonFilePath).catch(() => null);
-	if (stats && stats.isFile()) {
+	if (stats?.isFile()) {
 		console.info("package.json found");
 		const json: unknown = JSON.parse(await fs.readFile(jsonFilePath, "utf8"));
 		if (isObject(json) && typeof json.version === "string") {

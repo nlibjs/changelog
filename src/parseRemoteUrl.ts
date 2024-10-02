@@ -24,7 +24,7 @@ export const parseRemoteUrl = (remoteUrl: string): ParseRemoteUrlResult => {
 const getServiceName = (remoteUrl: string): GitServiceName => {
 	const host = getHost(remoteUrl);
 	const matched = /(\w+\.\w+)$/.exec(host);
-	switch (matched && matched[0]) {
+	switch (matched?.[0]) {
 		case "bitbucket.org":
 			return "bitbucket";
 		case "github.com":

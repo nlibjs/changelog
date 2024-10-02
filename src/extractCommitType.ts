@@ -17,7 +17,7 @@ export const extractCommitType = (
 		const type = typePart.trim();
 		if (isValidType(type)) {
 			return {
-				type: (props.aliases && props.aliases.get(type)) || type,
+				type: props.aliases?.get(type) || type,
 				body: line.slice(typePart.length + 1).trim(),
 			};
 		}

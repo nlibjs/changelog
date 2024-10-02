@@ -7,7 +7,7 @@ export class RemoteRepository {
 		const { stdout: remoteUrl } = await exec(
 			`git remote get-url ${remoteName}`,
 		);
-		return new this(remoteUrl);
+		return new RemoteRepository(remoteUrl);
 	}
 
 	public readonly remoteUrl: string;
@@ -45,8 +45,6 @@ export class RemoteRepository {
 		switch (serviceName) {
 			case "bitbucket":
 				return `${baseUrl}/commits/${commitish}`;
-			case "github":
-			case "gitlab":
 			default:
 				return `${baseUrl}/commit/${commitish}`;
 		}

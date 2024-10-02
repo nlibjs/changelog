@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import * as childProcess from "child_process";
+import * as childProcess from "node:child_process";
 
 export interface ExecResult {
 	stdout: string;
