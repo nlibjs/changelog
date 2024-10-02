@@ -6,7 +6,7 @@ import { isObject } from "@nlib/typing";
 export const getNodePackageVersion = async (): Promise<string | null> => {
 	const jsonFilePath = new URL(
 		"package.json",
-		pathToFileURL(`${process.cwd()}${path.sep}`),
+		pathToFileURL(`${process.cwd()}${path.sep}`) as URL,
 	);
 	const stats = await fs.stat(jsonFilePath).catch(() => null);
 	if (stats?.isFile()) {
