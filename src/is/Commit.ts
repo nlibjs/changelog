@@ -1,4 +1,4 @@
-import { createTypeChecker, isString } from "@nlib/typing";
+import { typeChecker, isString, isArrayOf } from "@nlib/typing";
 import type { CommitAuthor } from "./CommitAuthor.js";
 import { isCommitAuthor } from "./CommitAuthor.js";
 import type { CommitCommitter } from "./CommitCommitter.js";
@@ -16,9 +16,9 @@ export interface Commit {
 	message: string;
 }
 
-export const isCommit = createTypeChecker<Commit>("Commit", {
-	tag: isString.array,
-	reference: isString.array,
+export const isCommit = typeChecker<Commit>({
+	tag: isArrayOf(isString),
+	reference: isArrayOf(isString),
 	hash: isString,
 	shortHash: isString,
 	parentHash: isString,

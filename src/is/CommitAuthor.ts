@@ -1,4 +1,4 @@
-import { createTypeChecker, isString, isValidDate } from "@nlib/typing";
+import { typeChecker, isString, isValidDate } from "@nlib/typing";
 
 export interface CommitAuthor {
 	date: Date;
@@ -6,7 +6,7 @@ export interface CommitAuthor {
 	email: string;
 }
 
-export const isCommitAuthor = createTypeChecker<CommitAuthor>("CommitAuthor", {
+export const isCommitAuthor = typeChecker<CommitAuthor>({
 	date: isValidDate,
 	name: isString,
 	email: isString,

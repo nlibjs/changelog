@@ -1,6 +1,5 @@
 import * as assert from "node:assert/strict";
 import { test } from "node:test";
-import type { Resolved } from "@nlib/typing";
 import { getCommit } from "./getCommit.js";
 import {
 	firstCommit,
@@ -11,7 +10,7 @@ import {
 
 interface Case {
 	input: string;
-	expected: Partial<Resolved<ReturnType<typeof getCommit>>>;
+	expected: Partial<Awaited<ReturnType<typeof getCommit>>>;
 }
 
 const cases: Array<Case> = [
