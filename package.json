@@ -23,14 +23,13 @@
     "!**/*.test.*"
   ],
   "bin": {
-    "changelog": "./lib/cli.mjs",
-    "nlib-changelog": "./lib/cli.mjs"
+    "changelog": "./lib/cli.mjs"
   },
   "scripts": {
     "build": "tsc",
     "test": "run-s build test:*",
-    "test:unit": "ava --timeout=30s",
-    "lint": "eslint --ext .mts src",
+    "test:unit": "node --import=@nlib/tsm --test src",
+    "lint": "biome lint",
     "version": "node ./lib/cli.mjs --output CHANGELOG.md && git add CHANGELOG.md"
   },
   "dependencies": {
@@ -38,35 +37,11 @@
     "commander": "11.1.0"
   },
   "devDependencies": {
-    "@nlib/eslint-config": "3.20.5",
-    "@nlib/githooks": "0.2.0",
-    "@nlib/indexen": "0.2.9",
+    "@biomejs/biome": "1.9.3",
+    "@nlib/tsm": "1.0.1",
     "@types/node": "20.11.29",
-    "@typescript-eslint/eslint-plugin": "6.21.0",
-    "@typescript-eslint/parser": "6.21.0",
-    "ava": "5.3.1",
-    "eslint": "8.57.0",
-    "lint-staged": "14.0.1",
     "npm-run-all": "4.1.5",
-    "prettier": "3.2.5",
     "typescript": "5.4.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@nlib/eslint-config"
-    ],
-    "env": {
-      "node": true
-    }
-  },
-  "ava": {
-    "files": [
-      "lib/**/*.test.mjs"
-    ]
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown",
-    "**/*.*(m|c)+(j|t)s*(x)": "eslint"
   },
   "renovate": {
     "extends": [
