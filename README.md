@@ -18,7 +18,7 @@ Add the [npm-version](https://docs.npmjs.com/cli/commands/npm-version) scripts t
 ```json
 {
   "scripts": {
-    "version": "nlib-changelog --output CHANGELOG.md && git add CHANGELOG.md"
+    "version": "npx @nlib/changelog --output CHANGELOG.md && git add CHANGELOG.md"
   }
 }
 ```
