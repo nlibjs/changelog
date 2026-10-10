@@ -118,3 +118,24 @@ test("Use the committer date in release headings", async () => {
 		await fs.rm(cwd, { recursive: true, force: true });
 	}
 });
+
+test("Link commits for a remote URL without .git", async () => {
+	const cwd = await fs.mkdtemp(path.join(os.tmpdir(), "changelog-"));
+	try {
+		const git = async (args: string) => await exec(`git ${args}`, { cwd });
+		await git("init");
+		await git(
+			'-c user.name=a -c user.email=a@example.com commit --allow-empty -m "feat: add something"',
+		);
+		await git("tag v1.0.0");
+		await git("remote add origin https://github.com/example/repo");
+		const { stdout } = await exec(`node ${scriptPath} --head v1.0.0`, { cwd });
+		assert.equal(
+			stdout.includes("https://github.com/example/repo/commit/"),
+			true,
+		);
+		assert.equal(stdout.includes("unknown/unknown"), false);
+	} finally {
+		await fs.rm(cwd, { recursive: true, force: true });
+	}
+});

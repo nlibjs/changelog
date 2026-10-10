@@ -12,9 +12,11 @@ export interface ParseRemoteUrlResult {
  * https://gitlab.com/user/repo.git
  * git@bitbucket.org:user/repo.git
  * https://user@bitbucket.org/user/repo.git
+ *
+ * The .git suffix and a trailing slash are optional.
  */
 export const parseRemoteUrl = (remoteUrl: string): ParseRemoteUrlResult => {
-	const [, userName, repositoryName] = /([^:/]+?)\/([^/]+?)\.git$/.exec(
+	const [, userName, repositoryName] = /([^:/]+?)\/([^/]+?)(?:\.git)?\/?$/.exec(
 		remoteUrl,
 	) || ["", "unknown", "unknown"];
 	const serviceName = getServiceName(remoteUrl);
