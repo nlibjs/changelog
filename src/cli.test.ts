@@ -92,3 +92,29 @@ test("Write only the changelog to stdout", async () => {
 		await fs.rm(cwd, { recursive: true, force: true });
 	}
 });
+
+test("Use the committer date in release headings", async () => {
+	const cwd = await fs.mkdtemp(path.join(os.tmpdir(), "changelog-"));
+	try {
+		const git = async (args: string) =>
+			await exec(`git ${args}`, {
+				cwd,
+				env: {
+					...process.env,
+					GIT_AUTHOR_DATE: "2020-01-02T00:00:00Z",
+					GIT_COMMITTER_DATE: "2020-02-02T00:00:00Z",
+				},
+			});
+		await git("init");
+		await git(
+			'-c user.name=a -c user.email=a@example.com commit --allow-empty -m "fix: example"',
+		);
+		await git("tag v1.0.1");
+		await git("remote add origin https://github.com/example/origin.git");
+		const { stdout } = await exec(`node ${scriptPath} --head v1.0.1`, { cwd });
+		assert.equal(stdout.includes("## v1.0.1 (2020-02-02)"), true);
+		assert.equal(stdout.includes("2020-01-02"), false);
+	} finally {
+		await fs.rm(cwd, { recursive: true, force: true });
+	}
+});
