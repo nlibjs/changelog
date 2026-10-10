@@ -12,8 +12,8 @@ export const exec = async (
 	await new Promise<ExecResult>((resolve, reject) => {
 		childProcess.exec(command, options, (error, stdout, stderr) => {
 			if (error) {
-				console.info(`--- stdout ---\n${stdout}`);
-				console.info(`--- stderr ---\n${stderr}`);
+				console.error(`--- stdout ---\n${stdout}`);
+				console.error(`--- stderr ---\n${stderr}`);
 				reject(error);
 			} else {
 				resolve({
