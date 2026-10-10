@@ -106,7 +106,7 @@ export const logCommits = async (
 			{ maxBuffer: 1024 * 1024 * 1024 },
 			(error, out, stderr) => {
 				if (error) {
-					console.info(`--- stderr ---\n${stderr}`);
+					console.error(`--- stderr ---\n${stderr}`);
 					reject(error);
 				} else {
 					resolve(out);
