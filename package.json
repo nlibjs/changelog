@@ -33,13 +33,13 @@
     "version": "node ./lib/cli.js --output CHANGELOG.md && git add CHANGELOG.md"
   },
   "dependencies": {
-    "@nlib/typing": "3.0.1",
+    "@nlib/typing": "3.0.4",
     "commander": "15.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
     "@nlib/tsm": "1.1.0",
-    "@types/node": "22.13.9",
+    "@types/node": "22.20.5",
     "npm-run-all": "4.1.5",
     "typescript": "5.9.3"
   },
