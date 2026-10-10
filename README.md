@@ -49,7 +49,7 @@ npx @nlib/changelog --head v1.0.0 --output CHANGELOG.md
 npx @nlib/changelog --remote upstream --alias chore/build
 ```
 
-Commit links are generated for GitHub, GitLab, and Bitbucket remotes, over HTTPS or SSH, with or without the `.git` suffix.
+Commit links are generated for GitHub, GitLab, and Bitbucket remotes in the HTTPS form (`https://github.com/example/repo.git`) or the SCP-like SSH form (`git@github.com:example/repo.git`), with or without the `.git` suffix. Other forms, such as `ssh://git@github.com/example/repo.git`, are not recognized and produce links like `/example/repo/commit/<hash>`.
 
 ## How commits are collected
 
@@ -63,7 +63,7 @@ Release tags are expected on the first-parent chain of the head commit (the bran
 
 Collected commits are grouped into releases by tags that start with `v` (such as `v1.2.0`). A tagged commit and the earlier commits down to the previous release tag form one section, headed `## <tag> (<date>)`, where the date is the committer date of the tagged commit.
 
-When `--head` is not given and the current directory has a `package.json` with a `version`, the commits after the newest tag are rendered as a section named `v<version>`, dated today. This is the section the `version` script above adds before npm creates the tag.
+When `--head` is not given and the current directory has a `package.json` with a `version`, the commits after the newest tag are rendered as a section named `v<version>`. When no tag `v<version>` exists yet, the section is dated today; this is the section the `version` script above adds before npm creates the tag. When the newest tag already is `v<version>`, the commits after it are added to that tag's existing section, which keeps the tagged commit's date.
 
 Commits that belong to no release section are omitted. This happens when `--head` is given (the `package.json` version is not used) or when there is no `package.json` version: commits after the newest tag do not appear.
 
