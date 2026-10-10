@@ -2,6 +2,7 @@ import * as assert from "node:assert/strict";
 import * as fs from "node:fs/promises";
 import * as os from "node:os";
 import * as path from "node:path";
+import * as process from "node:process";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { exec } from "./exec.js";
@@ -55,4 +56,39 @@ test("Reject --remote without a name", async () => {
 	await assert.rejects(exec(`node ${scriptPath} --remote`), (error: Error) =>
 		error.message.includes("option '--remote <name>' argument missing"),
 	);
+});
+
+test("Write only the changelog to stdout", async () => {
+	const cwd = await fs.mkdtemp(path.join(os.tmpdir(), "changelog-"));
+	try {
+		const git = async (args: string) =>
+			await exec(`git ${args}`, {
+				cwd,
+				env: {
+					...process.env,
+					GIT_AUTHOR_DATE: "2020-09-07T00:00:00Z",
+					GIT_COMMITTER_DATE: "2020-09-07T00:00:00Z",
+				},
+			});
+		const commit = async (message: string) =>
+			await git(
+				`-c user.name=a -c user.email=a@example.com commit --allow-empty -m "${message}"`,
+			);
+		await git("init");
+		await commit("feat: add something");
+		await git("tag v1.0.0");
+		await commit("fix: fix something");
+		await git("tag v1.0.1");
+		await git("remote add origin https://github.com/example/origin.git");
+		const { stdout, stderr } = await exec(`node ${scriptPath}`, { cwd });
+		assert.equal(stdout.startsWith("# Changelog\n"), true);
+		assert.equal(stdout.includes("v1.0.1 2020-09-07"), false);
+		assert.equal(stderr.includes("v1.0.1 2020-09-07"), true);
+		const outputPath = path.join(cwd, "CHANGELOG.md");
+		await exec(`node ${scriptPath} --output "${outputPath}"`, { cwd });
+		const written = await fs.readFile(outputPath, "utf8");
+		assert.equal(written.trim(), stdout);
+	} finally {
+		await fs.rm(cwd, { recursive: true, force: true });
+	}
 });
