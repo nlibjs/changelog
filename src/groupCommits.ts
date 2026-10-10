@@ -45,7 +45,9 @@ export const groupCommits = async function* (
 				}
 				tagData = { tag, commit };
 			}
-			console.info(`${tag} ${commit.author.date.toISOString()} ${commit.hash}`);
+			console.error(
+				`${tag} ${commit.author.date.toISOString()} ${commit.hash}`,
+			);
 		}
 		const { type, body } = extractCommitType(commit.message, props);
 		let list = commits.get(type);

@@ -3,13 +3,11 @@ import { test } from "node:test";
 import type { Commit } from "./is/Commit.js";
 import { isCommit } from "./is/Commit.js";
 
-// biome-ignore lint/suspicious/noExportsInTest: used in other tests
 export const user = {
 	name: "Kei Ito",
 	email: ["kei.itof", "gmail.com"].join("@"),
 };
 
-// biome-ignore lint/suspicious/noExportsInTest: used in other tests
 export const firstCommit: Commit = {
 	tag: [],
 	reference: [],
@@ -24,7 +22,6 @@ test("first commit", () => {
 	assert.equal(isCommit(firstCommit), true);
 });
 
-// biome-ignore lint/suspicious/noExportsInTest: used in other tests
 export const secondCommit: Commit = {
 	tag: ["tag-2", "tag-1"],
 	reference: [],
@@ -42,7 +39,6 @@ test("second commit", () => {
 	assert.equal(isCommit(secondCommit), true);
 });
 
-// biome-ignore lint/suspicious/noExportsInTest: used in other tests
 export const thirdCommit: Commit = {
 	tag: [],
 	reference: [],
@@ -57,7 +53,5 @@ test("third commit", () => {
 	assert.equal(isCommit(thirdCommit), true);
 });
 
-// biome-ignore lint/suspicious/noExportsInTest: used in other tests
 export const thirdCommitLike: Partial<Commit> = { ...thirdCommit };
-// biome-ignore lint/performance/noDelete: make sure the property is deleted
 delete thirdCommitLike.reference;

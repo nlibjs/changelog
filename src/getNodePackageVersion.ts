@@ -10,13 +10,13 @@ export const getNodePackageVersion = async (): Promise<string | null> => {
 	);
 	const stats = await fs.stat(jsonFilePath).catch(() => null);
 	if (stats?.isFile()) {
-		console.info("package.json found");
+		console.error("package.json found");
 		const json: unknown = JSON.parse(await fs.readFile(jsonFilePath, "utf8"));
 		if (isObject(json) && typeof json.version === "string") {
-			console.info(`version: ${json.version}`);
+			console.error(`version: ${json.version}`);
 			return json.version;
 		}
-		console.info("package.json found but version is not found");
+		console.error("package.json found but version is not found");
 	}
 	return null;
 };
