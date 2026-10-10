@@ -7,6 +7,8 @@ A command to generate CHANGELOG.md from commit history.
 
 ## Install
 
+Requires Node.js 22.12.0 or later.
+
 ```
 npm install --save-dev @nlib/changelog
 ```

@@ -14,7 +14,7 @@
   "homepage": "https://github.com/nlibjs/changelog",
   "repository": "https://github.com/nlibjs/changelog",
   "engines": {
-    "node": ">=14"
+    "node": ">=22.12.0"
   },
   "type": "module",
   "main": "./lib/index.js",
