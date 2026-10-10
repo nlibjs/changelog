@@ -1,4 +1,7 @@
 import * as assert from "node:assert/strict";
+import * as fs from "node:fs/promises";
+import * as os from "node:os";
+import * as path from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { exec } from "./exec.js";
@@ -17,4 +20,39 @@ test("Generate a changelog before tag-1", async () => {
 	console.info(stdout);
 	assert.equal(stdout.includes("## v0.1.1 (2020-09-07)"), false);
 	assert.equal(stdout.includes("## v0.1.0 (2020-09-07)"), true);
+});
+
+test("Use the remote given by --remote", async () => {
+	const cwd = await fs.mkdtemp(path.join(os.tmpdir(), "changelog-"));
+	try {
+		const git = async (args: string) => await exec(`git ${args}`, { cwd });
+		await git("init");
+		await git(
+			'-c user.name=a -c user.email=a@example.com commit --allow-empty -m "feat: add something"',
+		);
+		await git("tag v1.0.0");
+		await git("remote add origin https://github.com/example/origin.git");
+		await git("remote add upstream https://github.com/example/upstream.git");
+		const { stdout } = await exec(`node ${scriptPath} --remote upstream`, {
+			cwd,
+		});
+		assert.equal(
+			stdout.includes("https://github.com/example/upstream/commit/"),
+			true,
+		);
+		assert.equal(stdout.includes("https://github.com/example/origin/"), false);
+		const { stdout: defaultStdout } = await exec(`node ${scriptPath}`, { cwd });
+		assert.equal(
+			defaultStdout.includes("https://github.com/example/origin/commit/"),
+			true,
+		);
+	} finally {
+		await fs.rm(cwd, { recursive: true, force: true });
+	}
+});
+
+test("Reject --remote without a name", async () => {
+	await assert.rejects(exec(`node ${scriptPath} --remote`), (error: Error) =>
+		error.message.includes("option '--remote <name>' argument missing"),
+	);
 });
