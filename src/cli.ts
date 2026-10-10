@@ -68,7 +68,7 @@ program.action(
 				};
 			}
 		}
-		console.info(options);
+		console.error(options);
 		const remote = await RemoteRepository.get(props.remote);
 		for await (const fragment of generateChangelog(
 			remote,
