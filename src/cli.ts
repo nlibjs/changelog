@@ -30,14 +30,18 @@ program.description(description);
 program.option("-o, --output <path>", "A path where the result is written to.");
 program.option("--head <commit-ish>", "Specify the head commit-ish.");
 program.option("--alias <aliases...>", "Specify the commit type aliases.");
-program.option("--remote", "Specify the short name of remote.");
+program.option(
+	"--remote <name>",
+	"Specify the short name of remote.",
+	"origin",
+);
 program.version(version);
 program.action(
 	async (props: {
 		output?: string;
 		head?: string;
 		alias?: Array<string>;
-		remote?: string;
+		remote: string;
 	}) => {
 		const output: stream.Writable = props.output
 			? fs.createWriteStream(path.resolve(props.output))
@@ -65,7 +69,7 @@ program.action(
 			}
 		}
 		console.info(options);
-		const remote = await RemoteRepository.get(props.remote || "origin");
+		const remote = await RemoteRepository.get(props.remote);
 		for await (const fragment of generateChangelog(
 			remote,
 			props.head,
