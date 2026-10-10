@@ -1,6 +1,6 @@
 import * as assert from "node:assert/strict";
 import { test } from "node:test";
-import { logCommits } from "./getCommit.js";
+import { exec } from "./exec.js";
 import type { Commit } from "./is/Commit.js";
 import { walkCommitHistory } from "./walkCommitHistory.js";
 import {
@@ -30,23 +30,15 @@ const collect = async (iterator: AsyncGenerator<Commit>) => {
 	return result;
 };
 
-/** The previous implementation: one `git log -1` per commit. */
-const walkOneByOne = async function* (
-	startCommitish: string,
-): AsyncGenerator<Commit> {
-	let revisions = [startCommitish];
-	while (0 < revisions.length) {
-		const [logged] = await logCommits(revisions, 1);
-		yield logged.commit;
-		revisions = logged.commit.parentHash.split(" ").filter(Boolean);
-	}
-};
-
-test("walk commit history in batches as git log -1 does", async () => {
+test("walk every reachable commit once, in batches", async () => {
 	/** A commit whose history includes merge commits. */
 	const head = "685c5b9ccdb62ebae448b74fa43634c622a21110";
-	const expected = await collect(walkOneByOne(head));
-	assert.ok(expected.some((commit) => commit.parentHash.includes(" ")));
-	assert.deepEqual(await collect(walkCommitHistory(head)), expected);
-	assert.deepEqual(await collect(walkCommitHistory(head, 7)), expected);
+	const commits = await collect(walkCommitHistory(head));
+	assert.ok(commits.some((commit) => commit.parentHash.includes(" ")));
+	const { stdout } = await exec(`git rev-list ${head}`);
+	assert.deepEqual(
+		commits.map((commit) => commit.hash).sort(),
+		stdout.split(/\s+/).sort(),
+	);
+	assert.deepEqual(await collect(walkCommitHistory(head, 7)), commits);
 });

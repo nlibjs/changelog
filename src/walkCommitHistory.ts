@@ -1,13 +1,20 @@
-import type { LoggedCommit } from "./getCommit.js";
 import { logCommits } from "./getCommit.js";
 import type { Commit } from "./is/Commit.js";
 
 const BatchSize = 1000;
 
+const listParents = (commit: Commit): Array<string> =>
+	commit.parentHash.split(" ").filter(Boolean);
+
 /**
- * Follows `parentHash` from `startCommitish`. For a merge commit, the parent
- * chosen is the one `git log -1 <parents...>` would output: the one with the
- * latest committer timestamp, and the first listed on a tie.
+ * Yields every commit reachable from `startCommitish` exactly once.
+ *
+ * The walk follows the first-parent chain. When it meets a merge commit, it
+ * yields the merge commit and then the commits merged by it (reachable from
+ * the merge commit but not from its first parent) before moving on to the
+ * first parent. Each commit is therefore attributed to the first-parent
+ * commit that brought it in, so tags on the first-parent chain mark release
+ * boundaries correctly even when a merged branch forked before an older tag.
  *
  * Commits are read in batches so that Git is not launched for every commit.
  */
@@ -15,37 +22,27 @@ export const walkCommitHistory = async function* (
 	startCommitish = "HEAD",
 	batchSize = BatchSize,
 ): AsyncGenerator<Commit> {
-	const cache = new Map<string, LoggedCommit>();
-	const fetch = async (
-		revisions: Array<string>,
-	): Promise<LoggedCommit | undefined> => {
-		const batch = await logCommits(revisions, batchSize);
-		for (const logged of batch) {
-			cache.set(logged.commit.hash, logged);
+	let next = startCommitish;
+	while (next) {
+		const batch = await logCommits(["--first-parent", next], batchSize);
+		if (batch.length === 0) {
+			break;
 		}
-		return batch[0];
-	};
-	const select = async (
-		parents: Array<string>,
-	): Promise<LoggedCommit | undefined> => {
-		let selected: LoggedCommit | undefined;
-		for (const hash of parents) {
-			const logged = cache.get(hash);
-			if (!logged) {
-				return await fetch(parents);
+		for (const { commit } of batch) {
+			yield commit;
+			const [firstParent = "", ...otherParents] = listParents(commit);
+			if (0 < otherParents.length) {
+				const merged = await logCommits(
+					["--topo-order", commit.hash, "--not", firstParent],
+					-1,
+				);
+				for (const logged of merged) {
+					if (logged.commit.hash !== commit.hash) {
+						yield logged.commit;
+					}
+				}
 			}
-			if (!selected || selected.committedAt < logged.committedAt) {
-				selected = logged;
-			}
+			next = firstParent;
 		}
-		return selected;
-	};
-	let current: LoggedCommit | undefined = await fetch([startCommitish]);
-	while (current) {
-		yield current.commit;
-		const parents: Array<string> = current.commit.parentHash
-			.split(" ")
-			.filter(Boolean);
-		current = parents.length > 0 ? await select(parents) : undefined;
 	}
 };
