@@ -58,7 +58,43 @@ const cases: Array<Case> = [
 	},
 ];
 
-for (const { input, expected } of cases) {
+const unsuffixedCases: Array<Case> = cases.map(({ input, expected }) => ({
+	input: input.replace(/\.git$/, ""),
+	expected,
+}));
+
+const extraCases: Array<Case> = [
+	{
+		input: "https://github.com/user/repo/",
+		expected: {
+			serviceName: "github",
+			userName: "user",
+			repositoryName: "repo",
+		},
+	},
+	{
+		input: "https://github.com/user/my.repo",
+		expected: {
+			serviceName: "github",
+			userName: "user",
+			repositoryName: "my.repo",
+		},
+	},
+	{
+		input: "https://github.com/user/my.repo.git",
+		expected: {
+			serviceName: "github",
+			userName: "user",
+			repositoryName: "my.repo",
+		},
+	},
+];
+
+for (const { input, expected } of [
+	...cases,
+	...unsuffixedCases,
+	...extraCases,
+]) {
 	test(input, () => {
 		assert.deepEqual(parseRemoteUrl(input), expected);
 	});
