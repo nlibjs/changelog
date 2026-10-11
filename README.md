@@ -5,6 +5,7 @@ A command to generate CHANGELOG.md from commit history.
 [![npm](https://img.shields.io/npm/v/%40nlib%2Fchangelog)](https://www.npmjs.com/package/@nlib/changelog)
 [![Test](https://github.com/nlibjs/changelog/actions/workflows/test.yml/badge.svg)](https://github.com/nlibjs/changelog/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/nlibjs/changelog/branch/main/graph/badge.svg)](https://codecov.io/gh/nlibjs/changelog)
+[![License](https://img.shields.io/npm/l/%40nlib%2Fchangelog)](https://github.com/nlibjs/changelog/blob/main/LICENSE.txt)
 
 ## Install
 
