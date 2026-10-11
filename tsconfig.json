@@ -13,6 +13,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "lib",
+    "sourceMap": true,
     "rootDir": "src"
   }
 }

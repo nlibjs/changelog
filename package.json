@@ -20,7 +20,8 @@
   "main": "./lib/index.js",
   "files": [
     "lib",
-    "!**/*.test.*"
+    "!**/*.test.*",
+    "!**/*.map"
   ],
   "bin": {
     "changelog": "./lib/cli.js"
