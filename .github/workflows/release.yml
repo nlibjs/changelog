@@ -4,15 +4,17 @@ on:
 jobs:
   Publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
           node-version: 24.x
-          cache: npm
+          package-manager-cache: false
           registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.21.0
       - run: npm ci
       - run: npm run build
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm stage publish
