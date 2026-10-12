@@ -1,48 +1,53 @@
+name: Release
+
 on:
   push:
     branches: [main]
     paths: [package.json]
   workflow_dispatch:
-concurrency: release
+    inputs:
+      action:
+        description: Operation
+        type: choice
+        options: [verify, stage, finalize]
+        default: verify
+        required: true
+      version:
+        description: "Required for finalize only, e.g. 1.2.3"
+        type: string
+        default: ""
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
-  Release:
-    runs-on: ubuntu-latest
+  Verify:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'verify'
     permissions:
-      contents: write # create the tag and the GitHub Release
-      id-token: write # npm Trusted Publishing
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-      - id: version
-        run: |
-          tag="v$(node -p 'require("./package.json").version')"
-          echo "tag=$tag" >> "$GITHUB_OUTPUT"
-          if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
-            echo "released=true" >> "$GITHUB_OUTPUT"
-          fi
-      - if: steps.version.outputs.released != 'true'
-        uses: actions/setup-node@v7
-        with:
-          node-version: 24.x
-          package-manager-cache: false
-          registry-url: https://registry.npmjs.org
-      - if: steps.version.outputs.released != 'true'
-        run: npm install --global npm@11.21.0
-      - if: steps.version.outputs.released != 'true'
-        run: npm ci
-      - if: steps.version.outputs.released != 'true'
-        run: npm run build
-      # Trusted Publishing (OIDC); a maintainer approves the staged version on npmjs.com.
-      - if: steps.version.outputs.released != 'true'
-        run: |
-          name=$(node -p 'require("./package.json").name')
-          version=$(node -p 'require("./package.json").version')
-          npm view "$name@$version" version >/dev/null 2>&1 || npm stage publish
-      - if: steps.version.outputs.released != 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG: ${{ steps.version.outputs.tag }}
-        run: |
-          awk -v h="## $TAG " 'index($0,h)==1{f=1;next} /^## v/{if(f)exit} f' CHANGELOG.md > notes.md
-          gh release create "$TAG" --target "$GITHUB_SHA" --title "$TAG" --notes-file notes.md
+      contents: read
+    uses: nlibjs/actions/.github/workflows/npm-release.yml@bdf4f40eafc6fd4732bb30f46fe4d611d44cb198
+    with:
+      action: verify
+
+  Stage:
+    if: github.event_name == 'push' || github.event.inputs.action == 'stage'
+    permissions:
+      contents: write
+      id-token: write
+    uses: nlibjs/actions/.github/workflows/npm-release.yml@bdf4f40eafc6fd4732bb30f46fe4d611d44cb198
+    with:
+      action: stage
+
+  Finalize:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'finalize'
+    permissions:
+      contents: write
+    uses: nlibjs/actions/.github/workflows/npm-release.yml@bdf4f40eafc6fd4732bb30f46fe4d611d44cb198
+    with:
+      action: finalize
+      version: ${{ github.event.inputs.version }}

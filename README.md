@@ -101,3 +101,7 @@ A scope is rendered in bold, and a commit marked with `!` or a `BREAKING CHANGE:
 | `refactor: tidy` with a `BREAKING CHANGE: rename the API` footer | Breaking Changes: `tidy` |
 | `chore: housekeeping` | omitted |
 | `update readme` | omitted |
+
+## Maintainer releases
+
+The [Release workflow](.github/workflows/release.yml) uses a pinned shared workflow for verification, npm staging, and GitHub Release finalization. npm approval happens before the GitHub Release is published. See [the release guide](docs/releases.md) for Trusted Publisher settings, manual operations, and recovery.
