@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.4.2 (2026-10-13)
+
+### Documentation
+
+- move release settings into workflow comments ([a2a3d97](https://github.com/nlibjs/changelog/commit/a2a3d97eec4ff4cec7a4908fcc553aaf07948221))
+- update the finalized release guide and recovery steps ([4b9a093](https://github.com/nlibjs/changelog/commit/4b9a0936ba4c51e459c99e992580afa35e0c53b9))
+
+### Continuous Integration
+
+- deploy changelog from published releases ([b6bced9](https://github.com/nlibjs/changelog/commit/b6bced919f118b9094494c7e40d39e27b0f68687))
+- adopt automatic release source retention ([1ae7ad3](https://github.com/nlibjs/changelog/commit/1ae7ad3fe16abc9d6ee8ae36ec4eea7d7a84e94d))
+- pin release workflow to preserve saved draft tags (#558) ([8c2ffd6](https://github.com/nlibjs/changelog/commit/8c2ffd6b77363b8159b55a83a90594d9ffdb5137))
+
+
 ## v0.4.1 (2026-10-12)
 
 ### Bug Fixes
