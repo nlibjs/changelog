@@ -1,6 +1,6 @@
 # Maintainer release guide
 
-The Release workflow uses `nlibjs/actions` at reviewed workflow commit `de71ad33952019d201f2942e2aae0794bb8d4794`. That workflow commit contains the shared permission-inheritance fix and pins the TypeScript helper to `ca360dbda6c47172efe9f06fee633b7e5f524609`.
+The Release workflow uses `nlibjs/actions` at reviewed workflow commit `1ff589ed2dc842961210788eae5d19716c8c50fd`. That workflow commit preserves draft version tags during receipt updates and publication, retains the permission-inheritance fix, and pins the TypeScript helper to `d685c67777dfeb0325ecc707533bf5dddbd26439`.
 
 Release tooling uses Node 26.x, npm 11.21.0, and cleanup-package-json 0.5.0. The package's supported Node version and compatibility CI matrix stay defined by this repository's package.json and test workflow.
 
@@ -34,12 +34,13 @@ The shared workflow removes development metadata from the packed manifest and pr
 - If npm and the version tag already exist, stage succeeds as a no-op; dependency-only changes do not publish the same version again.
 - If a saved draft has a successful staging receipt, approve the pending npm version and finalize. Do not submit the same version again.
 - If staging or saving the receipt fails, keep the draft and inspect npm Staged Packages and the public registry. An unconfirmed draft makes stage retries fail without resending. If the version is pending, approve it; if public, finalize and let the saved integrity check confirm it.
+- A draft title alone does not identify its version tag. If Finalize cannot find an existing draft, inspect its actual tag, saved source and assets. An `untagged-*` placeholder requires a verified restoration of the intended tag while retaining the draft; do not re-stage an already pending or public npm version.
 - If GitHub finalization fails, rerun finalize for the same approved version. It uses the saved tarball and SHA instead of rebuilding current main.
 - Duplicate drafts/assets, integrity mismatches, inconsistent tags, and permission errors require investigation. The workflow does not automatically delete or repair them.
 
 Only after confirming that neither a pending nor a public npm version exists may a maintainer reset a definitively failed attempt. Record the error and draft target SHA, save the assets, fix the cause, then manually delete that draft and stage again. The new attempt builds current main; check its version and changes against the recorded SHA. Keep the draft if npm's state remains uncertain.
 
-See the shared workflow's [full recovery procedure](https://github.com/nlibjs/actions/blob/de71ad33952019d201f2942e2aae0794bb8d4794/README.md#existing-versions-and-failures). Validate real OIDC/provenance signing and draft publication during the first normal pilot release; local checks use verification and packing only.
+See the shared workflow's [full recovery procedure](https://github.com/nlibjs/actions/blob/1ff589ed2dc842961210788eae5d19716c8c50fd/README.md#existing-versions-and-failures). Validate real OIDC/provenance signing and draft publication during the first normal pilot release; local checks use verification and packing only.
 
 ## Updating the shared workflow
 
