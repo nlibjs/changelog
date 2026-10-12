@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.4.1 (2026-10-12)
+
+### Bug Fixes
+
+- remove nonexistent library main entry (#556) ([9bf1dfd](https://github.com/nlibjs/changelog/commit/9bf1dfd0fda20a530df55c42bba4f36a3aef14d6))
+- pin release caller to inherited-permission workflow (#555) ([ff3a785](https://github.com/nlibjs/changelog/commit/ff3a7852615b46aa1938b3bb8b1a55b09f7976a4))
+
+### Continuous Integration
+
+- adopt shared npm release workflow for changelog pilot (#554) ([0fc86df](https://github.com/nlibjs/changelog/commit/0fc86dffba69fe6c2dd45d8d91e491fd4de2148c))
+- release automatically when the package.json version changes on main (#553) ([0b2b586](https://github.com/nlibjs/changelog/commit/0b2b586369483cab60c5096d72dcc6dedc6012eb))
+
+
 ## v0.4.0 (2026-10-11)
 
 ### Breaking Changes
