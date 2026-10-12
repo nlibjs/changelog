@@ -1,10 +1,10 @@
 # Maintainer release guide
 
-The Release workflow uses `nlibjs/actions` at reviewed workflow commit `1ff589ed2dc842961210788eae5d19716c8c50fd`. That workflow commit preserves draft version tags during receipt updates and publication, retains the permission-inheritance fix, and pins the TypeScript helper to `d685c67777dfeb0325ecc707533bf5dddbd26439`.
+The Release workflow pins `nlibjs/actions` to `1ff589ed2dc842961210788eae5d19716c8c50fd`, with helper `d685c67777dfeb0325ecc707533bf5dddbd26439`.
 
 Release tooling uses Node 26.x, npm 11.21.0, and cleanup-package-json 0.5.0. The package's supported Node version and compatibility CI matrix stay defined by this repository's package.json and test workflow.
 
-## Before the first shared release
+## Trusted Publisher configuration
 
 In npmjs.com's settings for `@nlib/changelog`, verify this GitHub Actions Trusted Publisher configuration:
 
@@ -15,7 +15,7 @@ In npmjs.com's settings for `@nlib/changelog`, verify this GitHub Actions Truste
 | Workflow filename | `release.yml` |
 | Environment | Leave empty |
 
-The publishing identity is the caller repository, not `nlibjs/actions`. Stage requests `contents: write` and `id-token: write`; Finalize requests only `contents: write`. No npm token, inherited secrets, or deployment environment is needed. Confirm that the repository's Actions settings allow calling the public shared workflow and its pinned actions. These npm and GitHub settings must be checked by the maintainer; this adoption change does not modify them.
+Stage authenticates as this repository. Stage requests `contents: write` and `id-token: write`; Finalize requests `contents: write`. Confirm that the repository's Actions settings allow the shared workflow and its pinned actions.
 
 ## Operations
 
@@ -25,9 +25,9 @@ The publishing identity is the caller repository, not `nlibjs/actions`. Stage re
 4. Approve the exact package/version in npmjs.com's **Staged Packages** using maintainer 2FA. A draft GitHub Release remains unpublished while npm approval is pending.
 5. Once npm exposes the approved version, select main, `action=finalize`, and the approved version without the `v` prefix (for example, `0.4.1`). Finalize checks the public npm integrity against the saved tarball, verifies the tag SHA, and publishes the draft. This package has no JSR job.
 
-Manual dispatch defaults to `verify`. Stage and Finalize accept only main. Concurrency retains the `release` group and does not cancel an in-progress operation. This adoption PR keeps the package version unchanged, so merging it alone does not trigger the package.json release path.
+Manual dispatch defaults to `verify`. Stage and Finalize accept only main. The `release` concurrency group queues operations without canceling an in-progress run.
 
-The shared workflow removes development metadata from the packed manifest and preserves consumer fields such as dependencies, main, bin, types, and publishConfig. Cleanup tooling is installed in the shared action's own directory, not added to this package's dependencies. The repository's tracked manifest is unchanged by adoption.
+The shared workflow removes development metadata from the packed manifest and preserves consumer fields such as dependencies, main, bin, types, and publishConfig.
 
 ## Recovery
 
@@ -40,7 +40,19 @@ The shared workflow removes development metadata from the packed manifest and pr
 
 Only after confirming that neither a pending nor a public npm version exists may a maintainer reset a definitively failed attempt. Record the error and draft target SHA, save the assets, fix the cause, then manually delete that draft and stage again. The new attempt builds current main; check its version and changes against the recorded SHA. Keep the draft if npm's state remains uncertain.
 
-See the shared workflow's [full recovery procedure](https://github.com/nlibjs/actions/blob/1ff589ed2dc842961210788eae5d19716c8c50fd/README.md#existing-versions-and-failures). Validate real OIDC/provenance signing and draft publication during the first normal pilot release; local checks use verification and packing only.
+### Publication permission failures
+
+If the saved commit's workflow files differ from current main and no branch or tag points directly to that commit, GitHub can reject publication with `403` because the token needs workflow modification permission. See [GitHub's permission requirement](https://github.blog/changelog/2023-11-02-github-actions-enforcing-workflow-scope-when-creating-a-release/).
+
+After verifying the draft's full source SHA and package integrity, a maintainer can retain that source with a temporary branch:
+
+```sh
+git push origin <saved-sha>:refs/heads/release-source/<version>
+```
+
+Retry Finalize on main for the same version. Once the published version tag resolves to the saved SHA, delete the temporary branch. This recovery preserves the staged package and its source.
+
+See the shared workflow's [full recovery procedure](https://github.com/nlibjs/actions/blob/1ff589ed2dc842961210788eae5d19716c8c50fd/README.md#existing-versions-and-failures).
 
 ## Updating the shared workflow
 
