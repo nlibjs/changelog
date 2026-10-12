@@ -1,53 +1,41 @@
+# Release and recovery: https://github.com/nlibjs/actions#release-procedure
+# npm Trusted Publisher: nlibjs/changelog, release.yml, environment: empty.
 name: Release
-
 on:
-  push:
-    branches: [main]
-    paths: [package.json]
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       action:
         description: Operation
         type: choice
-        options: [verify, stage, finalize]
+        options: [verify, stage]
         default: verify
         required: true
-      version:
-        description: "Required for finalize only, e.g. 1.2.3"
+      tag:
+        description: "Published Release tag for retry, e.g. v1.2.3"
         type: string
         default: ""
-        required: false
-
 permissions:
   contents: read
-
 concurrency:
-  group: release
+  group: release-${{ github.event.release.tag_name || inputs.tag || github.ref }}
   cancel-in-progress: false
-
 jobs:
   Verify:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'verify'
+    if: github.event_name == 'workflow_dispatch' && inputs.action == 'verify'
     permissions:
       contents: read
-    uses: nlibjs/actions/.github/workflows/npm-release.yml@986b87befafad2f4f990c934165a90ea37ddbf36
+    uses: nlibjs/actions/.github/workflows/npm-release.yml@cde77910e399ec821de29a242f01e44311461605
     with:
       action: verify
-
   Stage:
-    if: github.event_name == 'push' || github.event.inputs.action == 'stage'
+    if: (github.event_name == 'release' && !github.event.release.prerelease) || inputs.action == 'stage'
     permissions:
-      contents: write
+      contents: read
+      actions: read
       id-token: write
-    uses: nlibjs/actions/.github/workflows/npm-release.yml@986b87befafad2f4f990c934165a90ea37ddbf36
+    uses: nlibjs/actions/.github/workflows/npm-release.yml@cde77910e399ec821de29a242f01e44311461605
     with:
       action: stage
-
-  Finalize:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'finalize'
-    permissions:
-      contents: write
-    uses: nlibjs/actions/.github/workflows/npm-release.yml@986b87befafad2f4f990c934165a90ea37ddbf36
-    with:
-      action: finalize
-      version: ${{ github.event.inputs.version }}
+      tag: ${{ github.event.release.tag_name || inputs.tag }}
