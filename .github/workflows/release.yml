@@ -30,7 +30,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'verify'
     permissions:
       contents: read
-    uses: nlibjs/actions/.github/workflows/npm-release.yml@bdf4f40eafc6fd4732bb30f46fe4d611d44cb198
+    uses: nlibjs/actions/.github/workflows/npm-release.yml@de71ad33952019d201f2942e2aae0794bb8d4794
     with:
       action: verify
 
@@ -39,7 +39,7 @@ jobs:
     permissions:
       contents: write
       id-token: write
-    uses: nlibjs/actions/.github/workflows/npm-release.yml@bdf4f40eafc6fd4732bb30f46fe4d611d44cb198
+    uses: nlibjs/actions/.github/workflows/npm-release.yml@de71ad33952019d201f2942e2aae0794bb8d4794
     with:
       action: stage
 
@@ -47,7 +47,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'finalize'
     permissions:
       contents: write
-    uses: nlibjs/actions/.github/workflows/npm-release.yml@bdf4f40eafc6fd4732bb30f46fe4d611d44cb198
+    uses: nlibjs/actions/.github/workflows/npm-release.yml@de71ad33952019d201f2942e2aae0794bb8d4794
     with:
       action: finalize
       version: ${{ github.event.inputs.version }}

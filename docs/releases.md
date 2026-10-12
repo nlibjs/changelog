@@ -1,6 +1,6 @@
 # Maintainer release guide
 
-The Release workflow uses `nlibjs/actions` at reviewed workflow commit `bdf4f40eafc6fd4732bb30f46fe4d611d44cb198`. That commit is in the shared repository's main history and pins the TypeScript helper to `ca360dbda6c47172efe9f06fee633b7e5f524609`.
+The Release workflow uses `nlibjs/actions` at reviewed workflow commit `de71ad33952019d201f2942e2aae0794bb8d4794`. That workflow commit contains the shared permission-inheritance fix and pins the TypeScript helper to `ca360dbda6c47172efe9f06fee633b7e5f524609`.
 
 Release tooling uses Node 26.x, npm 11.21.0, and cleanup-package-json 0.5.0. The package's supported Node version and compatibility CI matrix stay defined by this repository's package.json and test workflow.
 
@@ -39,7 +39,7 @@ The shared workflow removes development metadata from the packed manifest and pr
 
 Only after confirming that neither a pending nor a public npm version exists may a maintainer reset a definitively failed attempt. Record the error and draft target SHA, save the assets, fix the cause, then manually delete that draft and stage again. The new attempt builds current main; check its version and changes against the recorded SHA. Keep the draft if npm's state remains uncertain.
 
-See the shared workflow's [full recovery procedure](https://github.com/nlibjs/actions/blob/bdf4f40eafc6fd4732bb30f46fe4d611d44cb198/README.md#existing-versions-and-failures). Validate real OIDC/provenance signing and draft publication during the first normal pilot release; local checks use verification and packing only.
+See the shared workflow's [full recovery procedure](https://github.com/nlibjs/actions/blob/de71ad33952019d201f2942e2aae0794bb8d4794/README.md#existing-versions-and-failures). Validate real OIDC/provenance signing and draft publication during the first normal pilot release; local checks use verification and packing only.
 
 ## Updating the shared workflow
 
