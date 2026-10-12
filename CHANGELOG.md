@@ -4,7 +4,7 @@
 
 ### Bug Fixes
 
-- remove nonexistent library main entry (C30) (#556) ([9bf1dfd](https://github.com/nlibjs/changelog/commit/9bf1dfd0fda20a530df55c42bba4f36a3aef14d6))
+- remove nonexistent library main entry (#556) ([9bf1dfd](https://github.com/nlibjs/changelog/commit/9bf1dfd0fda20a530df55c42bba4f36a3aef14d6))
 - pin release caller to inherited-permission workflow (#555) ([ff3a785](https://github.com/nlibjs/changelog/commit/ff3a7852615b46aa1938b3bb8b1a55b09f7976a4))
 
 ### Continuous Integration
