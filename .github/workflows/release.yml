@@ -1,3 +1,5 @@
+# Release and recovery: https://github.com/nlibjs/actions#release-procedure
+# npm Trusted Publisher: nlibjs/changelog, release.yml, environment: empty.
 name: Release
 
 on:
