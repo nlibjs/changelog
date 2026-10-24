@@ -5,7 +5,7 @@ import * as path from "node:path";
 import * as process from "node:process";
 import type * as stream from "node:stream";
 import { Command } from "commander";
-import { ensure, isString } from "@nlib/typing";
+import { ensure, isObjectWith, isString } from "@nlib/typing";
 import type { GenerateChangelogProps } from "./generateChangelog.js";
 import { generateChangelog } from "./generateChangelog.js";
 import { parseTypeAliases } from "./parseTypeAliases.js";
@@ -14,15 +14,19 @@ import { DefaultTypeAliases } from "./serializeCommitGroup.js";
 import { getNodePackageVersion } from "./getNodePackageVersion.js";
 import { getCommit } from "./getCommit.js";
 
-const { name, description, version } = ensure(
+const { name, description, version } = ensure<{
+	name: string;
+	description: string;
+	version: string;
+}>(
 	JSON.parse(
 		fs.readFileSync(new URL("../package.json", import.meta.url), "utf8"),
 	),
-	{
+	isObjectWith({
 		name: isString,
 		description: isString,
 		version: isString,
-	},
+	}),
 );
 const program = new Command();
 program.name(name);
