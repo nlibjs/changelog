@@ -60,7 +60,7 @@ const parseLoggedCommit = (rawCommit: string): LoggedCommit => {
 		return rawCommit.slice(currentOffset, nextNewLineOffset);
 	};
 	const committedAt = Number(consume());
-	const commit = ensure(
+	const commit = ensure<Commit>(
 		{
 			...parseRefNames(consume()),
 			hash: consume(),
