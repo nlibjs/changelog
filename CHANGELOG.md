@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.4.3 (2026-10-25)
+
+### Bug Fixes
+
+- support @nlib/typing v4 validation ([b20781f](https://github.com/nlibjs/changelog/commit/b20781f37453079565d405cd0311c7fef31b846b))
+
+### Dependency Upgrades
+
+- **renovate:** update dependency @nlib/typing to v4 ([aec18ee](https://github.com/nlibjs/changelog/commit/aec18eede1afd2c6c30c2377b77e49fb4345203c))
+
+
 ## v0.4.2 (2026-10-13)
 
 ### Documentation
