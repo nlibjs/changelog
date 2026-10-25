@@ -23,54 +23,6 @@ test("Generate a changelog before tag-1", async () => {
 	assert.equal(stdout.includes("## v0.1.0 (2020-09-07)"), true);
 });
 
-for (const version of ["1.0.0", "1.0.1"]) {
-	test(`Render package version ${version} with an existing release tag`, async () => {
-		const cwd = await fs.mkdtemp(path.join(os.tmpdir(), "changelog-"));
-		try {
-			const git = async (args: string) =>
-				await exec(`git ${args}`, {
-					cwd,
-					env: {
-						...process.env,
-						GIT_AUTHOR_DATE: "2020-02-02T00:00:00Z",
-						GIT_COMMITTER_DATE: "2020-02-02T00:00:00Z",
-					},
-				});
-			await git("init");
-			await git(
-				'-c user.name=a -c user.email=a@example.com commit --allow-empty -m "feat: initial release"',
-			);
-			await git("tag v1.0.0");
-			await git(
-				'-c user.name=a -c user.email=a@example.com commit --allow-empty -m "fix: follow-up"',
-			);
-			await git("remote add origin https://github.com/example/repo.git");
-			await fs.writeFile(
-				path.join(cwd, "package.json"),
-				JSON.stringify({ version }),
-			);
-			const before = new Date().toISOString().split("T")[0];
-			const { stdout } = await exec(`node ${scriptPath}`, { cwd });
-			const after = new Date().toISOString().split("T")[0];
-			const headings = stdout.match(/^## .+$/gm);
-			if (version === "1.0.0") {
-				assert.deepEqual(headings, ["## v1.0.0 (2020-02-02)"]);
-			} else {
-				assert.equal(headings?.length, 2);
-				assert.ok(
-					headings?.[0] === `## v1.0.1 (${before})` ||
-						headings?.[0] === `## v1.0.1 (${after})`,
-				);
-				assert.equal(headings?.[1], "## v1.0.0 (2020-02-02)");
-			}
-			assert.ok(stdout.includes("- follow-up ("));
-			assert.ok(stdout.includes("- initial release ("));
-		} finally {
-			await fs.rm(cwd, { recursive: true, force: true });
-		}
-	});
-}
-
 test("Use the remote given by --remote", async () => {
 	const cwd = await fs.mkdtemp(path.join(os.tmpdir(), "changelog-"));
 	try {

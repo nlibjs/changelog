@@ -28,7 +28,7 @@
   "scripts": {
     "build": "tsc",
     "test": "run-s build test:*",
-    "test:unit": "tsm-test lib",
+    "test:unit": "node --test lib/*.test.js",
     "lint": "biome lint",
     "version": "npm run build && node ./lib/cli.js --output CHANGELOG.md && git add CHANGELOG.md"
   },
