@@ -31,5 +31,8 @@ jobs:
       - run: npx c8 npm test
       - run: npx c8 report --reporter=text-lcov > coverage.lcov
       - uses: codecov/codecov-action@v7
+        if: matrix.os == 'ubuntu-latest' && matrix.node == '24.x'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.lcov
+          disable_search: true
